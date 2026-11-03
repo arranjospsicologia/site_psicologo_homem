@@ -1,0 +1,17 @@
+---
+/**
+ * Páginas locais: uma rota por página de tipo "local" em data/paginas.json.
+ * Nova cidade = texto em conteudo/, cadastro do profissional e entrada em
+ * paginas.json, contatos.json e seo.json. Nenhum componente precisa mudar.
+ */
+import PaginaLocal from '../components/PaginaLocal.astro';
+import { paginas } from '../lib/dados';
+
+export function getStaticPaths() {
+  return paginas
+    .filter((p) => p.tipo === 'local')
+    .map((p) => ({ params: { local: p.url.replace(/^\/|\/$/g, '') }, props: { paginaId: p.id } }));
+}
+const { paginaId } = Astro.props as { paginaId: string };
+---
+<PaginaLocal paginaId={paginaId} />

@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import Secoes from '../components/Secoes.astro';
+import BotaoContato from '../components/BotaoContato.astro';
+import PainelMarca from '../components/PainelMarca.astro';
+import { lerDocumento, textoFonte } from '../lib/conteudo';
+import { contatoDaPagina } from '../lib/contatos';
+import { pagina } from '../lib/dados';
+
+const p = pagina('home');
+const doc = lerDocumento(textoFonte(p.fonte!), { faq: ['Algumas dúvidas antes de começar'] });
+const contato = contatoDaPagina('home', 'principal')!;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Psicólogo Homem',
+  url: Astro.site ? new URL(import.meta.env.BASE_URL, Astro.site).href : undefined,
+  inLanguage: 'pt-BR',
+  publisher: { '@type': 'Organization', name: 'Arranjos Psicologia', url: 'https://arranjospsicologia.com.br/' },
+};
+---
+<Base paginaId="home" tipoPagina={p.tipo} jsonLd={jsonLd}>
+  <Secoes
+    doc={doc}
+    acoes={{ 'Entrar em contato': { C: BotaoContato, props: { contato, rotulo: 'Entrar em contato', paginaId: 'home', tipoPagina: p.tipo, posicionamento: 'abertura' } } }}
+    laterais={{ abertura: { C: PainelMarca } }}
+    destaque={['algumas-duvidas-antes-de-comecar']}
+  />
+</Base>

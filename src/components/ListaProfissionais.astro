@@ -1,0 +1,118 @@
+---
+/**
+ * Listagem com filtros combináveis (localização E serviço). Sem JavaScript,
+ * todos os profissionais aparecem em ordem alfabética; com JavaScript, a ordem
+ * é sorteada uma vez por visita e os filtros passam a funcionar.
+ */
+import CardProfissional from './CardProfissional.astro';
+import Icone from './Icone.astro';
+import { profissionais, servicos, cidadeUf, idLocalizacao } from '../lib/dados';
+import { dadosSite } from '../lib/dados';
+import { lerCards } from '../lib/conteudo';
+
+interface Props { textoLocalizacao?: string; textoCombinacao?: string }
+const { textoLocalizacao, textoCombinacao } = Astro.props;
+
+const { descricoes, microtextos } = lerCards();
+const m = (k: string, padrao: string) => microtextos[k] ?? padrao;
+const filtros = dadosSite.listagem.filtros;
+const fLocal = filtros.find((f) => f.id === 'localizacao_profissional')!;
+const fServico = filtros.find((f) => f.id === 'servico')!;
+
+// Opções vindas dos cadastros publicados (não de listas fixas).
+const locais = [...new Map(profissionais.map((p) => [idLocalizacao(p), cidadeUf(p)])).entries()]
+  .sort((a, b) => a[1].localeCompare(b[1], 'pt-BR'));
+const servicosOnline = servicos.filter((s) =>
+  profissionais.some((p) => p.servicos.some((o) => o.servico_id === s.id && o.modalidades.includes('online'))));
+
+const textos = {
+  um: m('Um resultado', '1 profissional encontrado.'),
+  varios: m('Vários resultados', '{quantidade} profissionais encontrados.'),
+  nenhum: m('Sem resultado', 'Nenhum profissional encontrado com estes filtros.'),
+};
+---
+<div class="lista" data-lista>
+  <form class="filtros" data-filtros hidden onsubmit="return false" aria-label="Filtrar profissionais">
+    <div class="filtros__campo">
+      <label for="filtro-localizacao">{fLocal.rotulo}</label>
+      <select id="filtro-localizacao" name="localizacao" data-filtro="localizacao" aria-describedby={textoLocalizacao ? 'ajuda-localizacao' : undefined}>
+        <option value="todos">{fLocal.opcoes_iniciais?.[0]?.rotulo ?? 'Todos'}</option>
+        {locais.map(([v, r]) => <option value={v}>{r}</option>)}
+      </select>
+      {textoLocalizacao && <div class="filtros__ajuda" id="ajuda-localizacao" set:html={textoLocalizacao} />}
+    </div>
+    <div class="filtros__campo">
+      <label for="filtro-servico">{fServico.rotulo}</label>
+      <select id="filtro-servico" name="servico" data-filtro="servico">
+        <option value="todos">{m('Opção inicial do filtro de serviço', 'Todos os serviços')}</option>
+        {servicosOnline.map((s) => <option value={s.id}>{s.rotulo}</option>)}
+      </select>
+    </div>
+    <div class="filtros__rodape">
+      {textoCombinacao && <div class="filtros__combinacao" set:html={textoCombinacao} />}
+      <button class="botao botao--texto" type="button" data-limpar>
+        <Icone nome="fechar" classe="ph-icon--p" />{m('Ação para remover os dois filtros', 'Limpar filtros')}
+      </button>
+    </div>
+  </form>
+
+  <p class="lista__contagem" role="status" aria-live="polite" data-contagem
+     data-texto-um={textos.um} data-texto-varios={textos.varios}></p>
+
+  <ul class="lista__cards" data-cards>
+    {profissionais.map((p) => (
+      <CardProfissional profissional={p} descricao={descricoes[p.nome_exibicao]} rotuloServicos={m('Rótulo do campo no card', 'Serviços oferecidos')} />
+    ))}
+  </ul>
+
+  <div class="lista__vazia" data-vazio hidden>
+    <p>{textos.nenhum}</p>
+    <button class="botao botao--secundario" type="button" data-limpar>{m('Ação para remover os dois filtros', 'Limpar filtros')}</button>
+  </div>
+</div>
+
+<script>
+  import { iniciarLista } from '../scripts/lista';
+  iniciarLista();
+</script>
+
+<style>
+  .filtros {
+    display: grid;
+    gap: 16px;
+    padding: 20px;
+    margin: 0 0 20px;
+    background: var(--ph-pedra);
+    border-radius: var(--ph-raio-bloco);
+  }
+  .filtros__campo { display: grid; gap: 6px; align-content: start; }
+  .filtros label { font-weight: 600; color: var(--ph-azul); }
+  .filtros select {
+    appearance: none;
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 44px 10px 14px;
+    border: 1.5px solid var(--ph-azul);
+    border-radius: var(--ph-raio-botao);
+    background-color: var(--ph-giz);
+    background-image: linear-gradient(45deg, transparent 50%, var(--ph-azul) 50%), linear-gradient(135deg, var(--ph-azul) 50%, transparent 50%);
+    background-position: calc(100% - 22px) 50%, calc(100% - 16px) 50%;
+    background-size: 6px 6px;
+    background-repeat: no-repeat;
+    color: var(--ph-grafite);
+    font: inherit;
+  }
+  .filtros select:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--ph-pedra), 0 0 0 6px var(--ph-azul); }
+  .filtros__ajuda :global(p), .filtros__combinacao :global(p) { margin: 0; font-size: 0.9375rem; color: var(--ph-grafite); }
+  .filtros__rodape { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+  .lista__contagem { font-weight: 600; color: var(--ph-azul); margin: 0 0 16px; min-height: 1.65em; }
+  .lista__cards { list-style: none; padding: 0; margin: 0; display: grid; gap: 20px; }
+  .lista__vazia { padding: 24px; border: 1.5px dashed var(--ph-pedra); border-radius: var(--ph-raio-bloco); }
+  @media (min-width: 768px) {
+    .filtros { grid-template-columns: 1fr 1fr; padding: 24px; column-gap: 24px; }
+    .filtros__rodape { grid-column: 1 / -1; }
+  }
+  @media (min-width: 1100px) {
+    .lista__cards { grid-template-columns: 1fr 1fr; }
+  }
+</style>

@@ -1,0 +1,75 @@
+---
+/** Card de um profissional na listagem. Dados do cadastro; descrição do texto dos cards. */
+import Retrato from './Retrato.astro';
+import BotaoContato from './BotaoContato.astro';
+import ServicosOferecidos from './ServicosOferecidos.astro';
+import RedesSociais from './RedesSociais.astro';
+import Icone from './Icone.astro';
+import Pendente from './Pendente.astro';
+import { cidadeUf, idLocalizacao, type Profissional } from '../lib/dados';
+import { contatoDoCard } from '../lib/contatos';
+import { url } from '../lib/caminhos';
+
+interface Props { profissional: Profissional; descricao?: string; rotuloServicos: string }
+const { profissional: p, descricao, rotuloServicos } = Astro.props;
+const online = p.servicos.filter((o) => o.modalidades.includes('online')).map((o) => o.servico_id);
+const rotuloLocal = `Conhecer o atendimento em ${p.cidade}`;
+---
+<li class="card" data-card data-id={p.id} data-localizacao={idLocalizacao(p)} data-servicos-online={online.join(' ')}>
+  <article class="card__corpo" aria-labelledby={`card-${p.id}`}>
+    <Retrato profissional={p} tamanhos="(min-width: 900px) 200px, (min-width: 600px) 180px, 120px" classe="card__retrato" />
+    <div class="card__identificacao">
+      <h3 class="card__nome" id={`card-${p.id}`}>{p.nome_exibicao}</h3>
+      <p class="card__registro">Psicólogo · {p.crp ? `CRP ${p.crp}` : <Pendente descricao={`CRP de ${p.nome_exibicao}`} />}</p>
+      <p class="card__local"><Icone nome="localizacao" classe="ph-icon--p" />{cidadeUf(p)} · Atendimento online</p>
+    </div>
+    <div class="card__texto">
+      {descricao ? <Fragment set:html={descricao} /> : <p><Pendente descricao={`Descrição de ${p.nome_exibicao}`} /></p>}
+      <p class="card__abordagem"><Icone nome="abordagem" classe="ph-icon--p" />{p.abordagem}</p>
+      <ServicosOferecidos profissional={p} rotulo={rotuloServicos} compacto nivel="p" />
+    </div>
+    <div class="card__acoes">
+      <BotaoContato contato={contatoDoCard(p.id)} rotulo={`Conversar com ${p.nome_exibicao.split(' ')[0]}`} paginaId="remoto" tipoPagina="diretorio" posicionamento="card" profissionalId={p.id} />
+      <RedesSociais profissional={p} paginaId="remoto" rotulo="Redes sociais:" />
+      <a class="card__local-link" href={url(p.pagina_local)}>{rotuloLocal}<Icone nome="seta-direita" classe="ph-icon--p" /></a>
+    </div>
+  </article>
+</li>
+
+<style>
+  .card { margin: 0; list-style: none; }
+  .card[hidden] { display: none; }
+  .card__corpo {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    grid-template-areas: 'foto id' 'texto texto' 'acoes acoes';
+    gap: 16px;
+    padding: 20px;
+    background: var(--ph-giz);
+    border: var(--ph-borda);
+    border-radius: var(--ph-raio-bloco);
+    height: 100%;
+    align-content: start;
+  }
+  .card__corpo :global(.card__retrato) { grid-area: foto; align-self: start; }
+  .card__identificacao { grid-area: id; align-self: center; }
+  .card__texto { grid-area: texto; }
+  .card__acoes { grid-area: acoes; display: grid; gap: 8px; justify-items: start; }
+  .card__acoes :global(.botao) { width: 100%; }
+  .card__acoes :global(.acao-pendente) { width: 100%; }
+  .card__nome { font-size: 1.3125rem; margin: 0 0 4px; }
+  .card__registro { margin: 0; font-size: 0.9375rem; color: var(--ph-grafite); }
+  .card__local { margin: 2px 0 0; font-size: 0.9375rem; color: var(--ph-cinza); display: flex; align-items: center; gap: 6px; }
+  .card__texto :global(p) { margin-bottom: 12px; }
+  .card__abordagem { display: flex; align-items: center; gap: 8px; font-weight: 500; color: var(--ph-azul); }
+  .card__local-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 500; }
+  @media (min-width: 600px) {
+    .card__corpo { grid-template-columns: 160px 1fr; grid-template-areas: 'foto id' 'foto texto' 'acoes acoes'; column-gap: 24px; padding: 24px; }
+    .card__identificacao { align-self: start; }
+    .card__acoes :global(.botao) { width: auto; }
+    .card__acoes :global(.acao-pendente) { width: auto; }
+  }
+  @media (min-width: 1000px) {
+    .card__corpo { grid-template-columns: 180px 1fr; }
+  }
+</style>

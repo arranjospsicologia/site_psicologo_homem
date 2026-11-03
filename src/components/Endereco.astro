@@ -1,0 +1,19 @@
+---
+/** Endereço do atendimento presencial, a partir do cadastro. */
+import Icone from './Icone.astro';
+import Pendente from './Pendente.astro';
+import type { Profissional } from '../lib/dados';
+interface Props { profissional: Profissional }
+const { profissional } = Astro.props;
+---
+<p class="endereco">
+  <Icone nome="localizacao" />
+  {profissional.endereco_presencial
+    ? <span>{profissional.endereco_presencial}</span>
+    : <Pendente descricao={`Endereço de atendimento de ${profissional.nome_exibicao} em ${profissional.cidade}`} />}
+</p>
+
+<style>
+  .endereco { display: flex; gap: 10px; align-items: flex-start; }
+  .endereco :global(.ph-icon) { margin-top: 2px; color: var(--ph-cobre); }
+</style>

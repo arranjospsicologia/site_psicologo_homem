@@ -1,0 +1,9 @@
+---
+/** Sprite dos 18 ícones aprovados, embutido uma vez por página. */
+import sprite from '../../identidade-visual/icones/sprite.svg?raw';
+const html = sprite.replace(
+  /^<svg\b[^>]*>/,
+  '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">',
+);
+---
+<Fragment set:html={html} />

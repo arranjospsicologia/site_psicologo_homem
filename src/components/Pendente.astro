@@ -1,0 +1,6 @@
+---
+/** Placeholder visível para dado ainda não informado. Listado pelo build. */
+import { htmlPendente } from '../lib/conteudo';
+interface Props { descricao: string }
+---
+<Fragment set:html={htmlPendente(Astro.props.descricao)} />

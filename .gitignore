@@ -1,0 +1,40 @@
+# Este repositório publica APENAS o site. Tudo na pasta do projeto é ignorado
+# por padrão; só os caminhos necessários ao site são liberados abaixo.
+# Documentos internos, briefings, registros de geração de imagens, estudos de
+# identidade e pacotes ZIP nunca entram no repositório.
+/*
+!/.gitignore
+!/.github/
+!/.env.example
+!/.nvmrc
+!/astro.config.mjs
+!/package.json
+!/package-lock.json
+!/tsconfig.json
+!/src/
+!/scripts/
+!/conteudo/
+!/data/
+!/public/
+
+# Artigos (textos da raiz)
+!/ja-pensou-por-que-voce-busca-um-psicologo-homem.md
+!/para-homens-que-buscam-terapia.md
+!/para-mulheres-que-buscam-um-psicologo-homem.md
+
+# Identidade visual: só o que o site usa
+!/identidade-visual/
+/identidade-visual/*
+!/identidade-visual/tokens.css
+!/identidade-visual/logotipo/
+!/identidade-visual/icones/
+/identidade-visual/icones/*.json
+/identidade-visual/icones/README.md
+
+# Gerados
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!/.env.example

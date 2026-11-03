@@ -1,0 +1,6 @@
+---
+/** Ícone do sprite oficial (identidade-visual/icones). Decorativo por padrão. */
+interface Props { nome: string; classe?: string; rotulo?: string }
+const { nome, classe = '', rotulo } = Astro.props;
+---
+<svg class:list={['ph-icon', classe]} aria-hidden={rotulo ? undefined : 'true'} role={rotulo ? 'img' : undefined} aria-label={rotulo} focusable="false"><use href={`#ph-${nome}`} /></svg>

@@ -1,0 +1,92 @@
+---
+/**
+ * Layout comum: metadados, marca, menu, rodapé, WhatsApp flutuante e
+ * preferências de privacidade. Toda página usa este layout.
+ */
+import '../styles/fontes.css';
+import '@fontsource/lora/latin-400.css';
+import '@fontsource/lora/latin-500.css';
+import '../../identidade-visual/tokens.css';
+import '../styles/global.css';
+
+import favicon from '../../identidade-visual/logotipo/favicon.svg?url';
+import Sprite from '../components/Sprite.astro';
+import Cabecalho from '../components/Cabecalho.astro';
+import Rodape from '../components/Rodape.astro';
+import WhatsAppFlutuante from '../components/WhatsAppFlutuante.astro';
+import Preferencias from '../components/PreferenciasPrivacidade.astro';
+import { seoDe, sufixoTitulo, pagina as paginaDe } from '../lib/dados';
+import { contatoDaPagina, tituloPagina } from '../lib/contatos';
+import { ambiente } from '../lib/config';
+import { url, urlAbsoluta, rotaLogica } from '../lib/caminhos';
+
+interface Props {
+  paginaId: string;
+  tipoPagina: string;
+  /** Profissional apresentado na página (para os eventos do flutuante). */
+  profissionalId?: string;
+  /** Imagem de compartilhamento (rota lógica). */
+  imagemOg?: string;
+  jsonLd?: Record<string, unknown>;
+  tipoOg?: 'website' | 'article' | 'profile';
+}
+const { paginaId, tipoPagina, profissionalId, imagemOg = '/og/padrao.png', jsonLd, tipoOg = 'website' } = Astro.props;
+
+const seo = seoDe(paginaId);
+const tituloCompleto = paginaId === 'home' ? `${sufixoTitulo} · ${seo.titulo}` : `${seo.titulo} · ${sufixoTitulo}`;
+const rota = rotaLogica(Astro.url.pathname);
+const canonical = urlAbsoluta(rota, Astro.site);
+const imagem = urlAbsoluta(imagemOg, Astro.site);
+const flutuante = contatoDaPagina(paginaId, 'flutuante');
+let nomeDaPagina = tituloPagina(paginaId);
+if (paginaId === '404') nomeDaPagina = 'Página não encontrada';
+try { paginaDe(paginaId); } catch { /* páginas de apoio sem cadastro */ }
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={seo.descricao} />
+    {!ambiente.indexavel && <meta name="robots" content="noindex" />}
+    {paginaId !== '404' && <link rel="canonical" href={canonical} />}
+    <link rel="icon" href={favicon} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
+    <meta name="theme-color" content="#F3F0E9" />
+    <meta property="og:type" content={tipoOg} />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Psicólogo Homem" />
+    <meta property="og:title" content={seo.titulo} />
+    <meta property="og:description" content={seo.descricao} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imagem} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {ambiente.indexavel && <link rel="sitemap" href={url('/sitemap-index.xml')} />}
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <Sprite />
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <Cabecalho rotaAtual={rota} />
+    <main id="conteudo" tabindex="-1">
+      <slot />
+    </main>
+    <Rodape paginaId={paginaId} tipoPagina={tipoPagina} nomeDaPagina={nomeDaPagina} />
+    <WhatsAppFlutuante contato={flutuante} paginaId={paginaId} tipoPagina={tipoPagina} profissionalId={profissionalId} />
+    <Preferencias />
+    <script>
+      import { iniciarEventos } from '../scripts/analytics';
+      import { iniciarFlutuante } from '../scripts/flutuante';
+      iniciarEventos();
+      iniciarFlutuante();
+    </script>
+  </body>
+</html>
+
+<style>
+  main:focus { outline: none; }
+</style>

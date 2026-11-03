@@ -1,0 +1,59 @@
+---
+/** Botão flutuante, conforme a matriz de contatos. Não existe em Atendimento Remoto. */
+import Icone from './Icone.astro';
+import type { Contato } from '../lib/contatos';
+interface Props { contato: Contato | null; paginaId: string; tipoPagina: string; profissionalId?: string }
+const { contato, paginaId, tipoPagina, profissionalId } = Astro.props;
+---
+{contato?.href && (
+  <aside class="flutuante__regiao" aria-label="Contato rápido">
+  <a
+    class="flutuante"
+    href={contato.href}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-flutuante
+    data-evento="contact_click"
+    data-page-id={paginaId}
+    data-page-type={tipoPagina}
+    data-placement="flutuante"
+    data-professional-id={profissionalId}
+    data-recipient-id={contato.destinatarioId}
+    aria-label={`Conversar com ${contato.nomeSaudacao} pelo WhatsApp (abre em nova aba)`}
+  >
+    <Icone nome="conversa" classe="flutuante__icone" />
+    <span class="flutuante__texto" aria-hidden="true">WhatsApp</span>
+  </a>
+  </aside>
+)}
+
+<style>
+  .flutuante {
+    position: fixed;
+    right: calc(16px + env(safe-area-inset-right));
+    bottom: calc(16px + env(safe-area-inset-bottom) + var(--ph-espaco-flutuante));
+    z-index: 40;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 56px;
+    height: 56px;
+    border-radius: 28px;
+    background: var(--ph-azul);
+    color: var(--ph-giz);
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgb(36 45 50 / 0.28);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .flutuante:hover { background: var(--ph-grafite); }
+  .flutuante:focus-visible { outline: none; box-shadow: var(--ph-sombra-foco); }
+  .flutuante__icone { width: 26px; height: 26px; }
+  .flutuante__texto { display: none; }
+  .flutuante[data-oculto] { opacity: 0; transform: translateY(12px); pointer-events: none; visibility: hidden; }
+  @media (min-width: 768px) {
+    .flutuante { width: auto; padding: 0 22px 0 18px; }
+    .flutuante__texto { display: inline; }
+  }
+</style>

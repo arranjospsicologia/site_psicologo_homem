@@ -1,0 +1,27 @@
+{
+  "consultado_em": "2026-11-02",
+  "arranjos": {
+    "rotulo": "Arranjos Psicologia",
+    "url": "https://arranjospsicologia.com.br/",
+    "status": "acessado"
+  },
+  "codigo_etica": {
+    "rotulo": "Código de Ética Profissional do Psicólogo",
+    "url": "https://site.cfp.org.br/wp-content/uploads/2012/07/codigo-de-etica-psicologia-1.pdf",
+    "fonte": "https://site.cfp.org.br/documentos/confira-o-novo-codigo-de-etica-profissional-do-psicologo/",
+    "status": "documento_acessado"
+  },
+  "atendimento_online": {
+    "rotulo": "Resolução CFP nº 9/2024 — atendimento por tecnologias digitais",
+    "url": "https://atosoficiais.com.br/cfp/resolucao-do-exercicio-profissional-n-9-2024-regulamenta-o-exercicio-profissional-da-psicologia-mediado-por-tecnologias-digitais-da-informacao-e-da-comunicacao-tdics-em-territorio-nacional-e-revoga-as-resolucao-cfp-n%C2%BA-11-de-11-de-maio-de-2018-e-resolucao-cfp-n%C2%BA-04-de-26-de-marco-de-2020",
+    "fonte": "https://transparencia.cfp.org.br/crp12/pergunta-frequente/atendimentopsicologicoonline/",
+    "status": "link_indicado_pelo_conselho_destino_bloqueou_consulta_automatizada",
+    "pendencia": "conferir abertura no navegador antes de publicar"
+  },
+  "cadastro_cfp": {
+    "rotulo": "Verificar registro profissional no CFP",
+    "url": "https://cadastro.cfp.org.br/",
+    "status": "portal_acessado",
+    "consulta_individual_realizada": false
+  }
+}

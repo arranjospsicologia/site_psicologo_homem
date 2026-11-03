@@ -1,0 +1,53 @@
+---
+/**
+ * Renderiza os blocos de um texto. Rótulos em negrito viram os controles
+ * indicados em `acoes`; comentários internos podem inserir componentes.
+ */
+import type { Bloco } from '../lib/conteudo';
+import Faq from './Faq.astro';
+import Acessos from './Acessos.astro';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Comp = { C: any; props?: Record<string, unknown> };
+interface Props {
+  blocos: Bloco[];
+  acoes?: Record<string, Comp>;
+  comentarios?: { padrao: RegExp; C: Comp['C']; props?: Record<string, unknown> }[];
+}
+const { blocos, acoes = {}, comentarios = [] } = Astro.props;
+
+// Ações consecutivas ficam no mesmo grupo de botões.
+type Item = { tipo: 'grupo'; acoes: string[] } | Bloco;
+const itens: Item[] = [];
+// Linha de identificação profissional em negrito ("Psicólogo · CRP ...") não é botão.
+const identificacao = /^Psic[óo]log[oa]\b.*CRP/i;
+for (const b of blocos) {
+  if (b.tipo === 'acao' && identificacao.test(b.rotulo)) {
+    itens.push({ tipo: 'html', html: `<p class="identificacao">${b.rotulo.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</p>` });
+    continue;
+  }
+  if (b.tipo === 'acao') {
+    if (!acoes[b.rotulo]) throw new Error(`Rótulo sem controle definido: "${b.rotulo}"`);
+    const ult = itens[itens.length - 1];
+    if (ult && ult.tipo === 'grupo') ult.acoes.push(b.rotulo);
+    else itens.push({ tipo: 'grupo', acoes: [b.rotulo] });
+  } else itens.push(b);
+}
+---
+{itens.map((b) => {
+  if (b.tipo === 'html') return <Fragment set:html={b.html} />;
+  if (b.tipo === 'links') return <Acessos itens={b.itens} />;
+  if (b.tipo === 'faq') return <Faq itens={b.itens} />;
+  if (b.tipo === 'grupo') {
+    return (
+      <div class="acoes">
+        {b.acoes.map((r) => { const { C, props } = acoes[r]; return <C {...props} />; })}
+      </div>
+    );
+  }
+  if (b.tipo === 'comentario') {
+    const h = comentarios.find((c) => c.padrao.test(b.texto));
+    if (h) { const C = h.C; return <C {...h.props} />; }
+  }
+  return null;
+})}

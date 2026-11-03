@@ -1,0 +1,13 @@
+---
+/** Perguntas frequentes com <details>: funciona com toque, teclado e sem JavaScript. */
+interface Props { itens: { pergunta: string; html: string }[] }
+const { itens } = Astro.props;
+---
+<div class="faq">
+  {itens.map((i) => (
+    <details>
+      <summary>{i.pergunta}</summary>
+      <div class="faq__resposta"><Fragment set:html={i.html} /></div>
+    </details>
+  ))}
+</div>

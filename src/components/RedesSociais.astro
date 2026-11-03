@@ -1,0 +1,36 @@
+---
+/** Redes confirmadas do profissional, com menor destaque que o contato. */
+import Icone from './Icone.astro';
+import Pendente from './Pendente.astro';
+import type { Profissional } from '../lib/dados';
+interface Props { profissional: Profissional; paginaId: string; rotulo?: string }
+const { profissional, paginaId, rotulo } = Astro.props;
+const nomes: Record<string, string> = { instagram: 'Instagram', linkedin: 'LinkedIn', site: 'Site', facebook: 'Facebook', youtube: 'YouTube' };
+const redes = profissional.redes ?? [];
+---
+<div class="redes">
+  {rotulo && <span class="redes__rotulo">{rotulo}</span>}
+  {redes.length ? (
+    <ul class="redes__lista">
+      {redes.map((r) => (
+        <li>
+          <a href={r.url} target="_blank" rel="noopener noreferrer" data-evento="social_click" data-page-id={paginaId} data-professional-id={profissional.id} data-network-id={r.rede}>
+            {nomes[r.rede] ?? r.rede}{r.usuario && r.rede === 'instagram' ? ` @${r.usuario}` : ''}
+            <Icone nome="link-externo" classe="ph-icon--p" />
+            <span class="visualmente-oculto"> (abre em nova aba)</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <Pendente descricao={`Redes sociais de ${profissional.nome_exibicao}`} />
+  )}
+</div>
+
+<style>
+  .redes { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+  .redes__rotulo { font-size: 0.9375rem; color: var(--ph-cinza); }
+  .redes__lista { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; }
+  .redes__lista li { margin: 0; }
+  .redes__lista a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 500; }
+</style>

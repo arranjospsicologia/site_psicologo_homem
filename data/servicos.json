@@ -1,0 +1,42 @@
+{
+  "status": "catalogo_editorial_para_implementacao",
+  "observacao": "As categorias não comprovam oferta por nenhum profissional. Confirmar cada serviço e suas modalidades antes da publicação.",
+  "modalidades_permitidas": [
+    "online",
+    "presencial"
+  ],
+  "servicos": [
+    {
+      "id": "psicoterapia-individual",
+      "rotulo": "Psicoterapia individual"
+    },
+    {
+      "id": "psicoterapia-infantil",
+      "rotulo": "Psicoterapia infantil"
+    },
+    {
+      "id": "psicoterapia-casais",
+      "rotulo": "Psicoterapia de casais"
+    },
+    {
+      "id": "psicoterapia-familias",
+      "rotulo": "Psicoterapia de famílias"
+    },
+    {
+      "id": "grupos",
+      "rotulo": "Coordenação de grupos"
+    }
+  ],
+  "cadastro_por_profissional": {
+    "campo": "profissionais[].servicos",
+    "campos_por_oferta": [
+      "servico_id",
+      "modalidades"
+    ],
+    "ids_referem_se_a": "servicos[].id",
+    "somente_ofertas_confirmadas": true,
+    "status_cadastro": "profissionais[].servicos_status",
+    "array_vazio_com_status_a_confirmar": "Informação pendente; não equivale a profissional sem serviços.",
+    "grupos": "Coordenação de grupos não comprova turma em andamento ou inscrições abertas."
+  }
+}

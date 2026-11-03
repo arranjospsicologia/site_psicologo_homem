@@ -1,0 +1,19 @@
+---
+/** Links de acesso (parágrafo de links separados por "·" no texto). */
+import Icone from './Icone.astro';
+import { url, rotaLogica } from '../lib/caminhos';
+interface Props { itens: { rotulo: string; href: string }[] }
+const { itens } = Astro.props;
+const icone = (href: string) => (/remoto|online/.test(href) ? 'online' : /artigos/.test(href) ? 'artigos' : 'localizacao');
+---
+<ul class="acessos">
+  {itens.map((i) => (
+    <li>
+      <a href={url(i.href)}>
+        <Icone nome={icone(rotaLogica(i.href))} />
+        <span>{i.rotulo}</span>
+        <Icone nome="seta-direita" classe="ph-icon--seta" />
+      </a>
+    </li>
+  ))}
+</ul>

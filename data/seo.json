@@ -1,0 +1,50 @@
+{
+  "observacao": "Título e descrição de busca de cada página. Editar aqui; os componentes leem este arquivo.",
+  "sufixo_titulo": "Psicólogo Homem",
+  "paginas": {
+    "home": {
+      "titulo": "Psicólogo homem presencial e online",
+      "descricao": "Para você que busca um psicólogo homem: profissionais da Abordagem Centrada na Pessoa, com atendimento presencial em Vitória e São Paulo e online em todo o Brasil."
+    },
+    "sobre": {
+      "titulo": "Sobre o projeto",
+      "descricao": "Por que o Psicólogo Homem existe: facilitar a busca de homens e mulheres que preferem conversar com um psicólogo homem, com respeito à sua escolha e autonomia."
+    },
+    "vitoria": {
+      "titulo": "Psicólogo homem em Vitória–ES · Bernardo Carielo",
+      "descricao": "Bernardo Carielo, psicólogo (CRP 16/5527) em Jardim da Penha, Vitória–ES. Abordagem Centrada na Pessoa, com atendimento presencial e online."
+    },
+    "saopaulo": {
+      "titulo": "Psicólogo homem em São Paulo–SP · Raphael Coimbra",
+      "descricao": "Raphael Coimbra, psicólogo (CRP 06/219272) em São Paulo–SP. Abordagem Centrada na Pessoa, com atendimento presencial e online."
+    },
+    "remoto": {
+      "titulo": "Psicólogo homem online · atendimento em todo o Brasil",
+      "descricao": "Conheça psicólogos homens que atendem online, de qualquer região do Brasil. Filtre por localização do profissional e pelo serviço que você procura."
+    },
+    "artigo-preferencia": {
+      "titulo": "Já pensou por que você busca um psicólogo homem?",
+      "descricao": "Uma reflexão sobre a preferência por um psicólogo homem: o que você espera desse encontro e por que se sentir acolhido importa na terapia."
+    },
+    "artigo-homens": {
+      "titulo": "Para homens que buscam terapia",
+      "descricao": "Masculinidades, sentimentos e vínculos: como a terapia pode ser um espaço para homens explorarem suas experiências, no próprio ritmo."
+    },
+    "artigo-mulheres": {
+      "titulo": "Para mulheres que buscam um psicólogo homem",
+      "descricao": "Mulheres podem preferir conversar com um psicólogo homem por motivos diferentes. Uma reflexão sobre essa escolha, sem generalizações."
+    },
+    "artigo-escolha": {
+      "titulo": "Como escolher um psicólogo com quem você se sinta à vontade?",
+      "descricao": "Como considerar a apresentação, a formação e a relação que começa nas primeiras conversas ao escolher um psicólogo."
+    },
+    "privacidade": {
+      "titulo": "Privacidade",
+      "descricao": "Como o Psicólogo Homem trata dados de navegação, estatísticas de visita e contatos por WhatsApp."
+    },
+    "404": {
+      "titulo": "Página não encontrada",
+      "descricao": "A página procurada não existe ou mudou de endereço."
+    }
+  }
+}

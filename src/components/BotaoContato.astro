@@ -1,0 +1,44 @@
+---
+/**
+ * Botão de contato por WhatsApp. Abre um rascunho editável; nada é enviado
+ * automaticamente. Sem número cadastrado, fica desativado com o aviso de pendência.
+ */
+import Icone from './Icone.astro';
+import Pendente from './Pendente.astro';
+import { pendenciaContato, type Contato } from '../lib/contatos';
+
+interface Props {
+  contato: Contato;
+  rotulo: string;
+  paginaId: string;
+  tipoPagina: string;
+  posicionamento: 'abertura' | 'perfil' | 'card' | 'conteudo' | 'rodape';
+  profissionalId?: string;
+  variante?: 'primario' | 'secundario';
+}
+const { contato, rotulo, paginaId, tipoPagina, posicionamento, profissionalId, variante = 'primario' } = Astro.props;
+const pendencia = pendenciaContato(contato);
+const classes = ['botao', variante === 'secundario' && 'botao--secundario'];
+---
+{contato.href ? (
+  <a
+    class:list={classes}
+    href={contato.href}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-evento="contact_click"
+    data-page-id={paginaId}
+    data-page-type={tipoPagina}
+    data-placement={posicionamento}
+    data-professional-id={profissionalId}
+    data-recipient-id={contato.destinatarioId}
+  >
+    <Icone nome="conversa" />
+    <span>{rotulo}<span class="visualmente-oculto"> (abre o WhatsApp em nova aba)</span></span>
+  </a>
+) : (
+  <span class="acao-pendente">
+    <span class:list={classes} aria-disabled="true"><Icone nome="conversa" />{rotulo}</span>
+    <Pendente descricao={pendencia ?? 'Contato'} />
+  </span>
+)}

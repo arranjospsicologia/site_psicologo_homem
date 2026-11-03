@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import Secoes from '../components/Secoes.astro';
+import { lerDocumento, textoFonte } from '../lib/conteudo';
+import { pagina } from '../lib/dados';
+
+const p = pagina('privacidade');
+const doc = lerDocumento(textoFonte(p.fonte!));
+---
+<Base paginaId="privacidade" tipoPagina={p.tipo}>
+  <div class="privacidade"><Secoes doc={doc} /></div>
+</Base>
+<style>
+  .privacidade :global(.secao) { padding-block: 32px; }
+  .privacidade :global(.secao h2) { font-size: 1.375rem; }
+</style>

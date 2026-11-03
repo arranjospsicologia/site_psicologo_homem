@@ -1,0 +1,118 @@
+{
+  "status": "implementado",
+  "paginas_conteudo": 9,
+  "paginas_apoio": 1,
+  "paginas": [
+    {
+      "id": "home",
+      "titulo": "Página inicial",
+      "url": "/",
+      "tipo": "servico",
+      "conteudo_status": "redigido",
+      "contato_principal": "arranjos",
+      "whatsapp_flutuante": "arranjos",
+      "fonte": "conteudo/home.md",
+      "texto_atualizado_em": "2026-11-02"
+    },
+    {
+      "id": "sobre",
+      "titulo": "Sobre Nós",
+      "url": "/sobre/",
+      "tipo": "institucional",
+      "conteudo_status": "redigido",
+      "contato_principal": "arranjos",
+      "whatsapp_flutuante": "arranjos",
+      "fonte": "conteudo/sobre.md",
+      "texto_atualizado_em": "2026-11-02"
+    },
+    {
+      "id": "vitoria",
+      "titulo": "Psicólogo homem em Vitória–ES",
+      "url": "/vitoria-es/",
+      "tipo": "local",
+      "profissional": "bernardo",
+      "conteudo_status": "redigido",
+      "contato_principal": "bernardo",
+      "whatsapp_flutuante": "bernardo",
+      "fonte": "conteudo/vitoria-es.md",
+      "texto_atualizado_em": "2026-11-02"
+    },
+    {
+      "id": "saopaulo",
+      "titulo": "Psicólogo homem em São Paulo–SP",
+      "url": "/sao-paulo-sp/",
+      "tipo": "local",
+      "profissional": "raphael",
+      "conteudo_status": "redigido",
+      "contato_principal": "raphael",
+      "whatsapp_flutuante": "bernardo",
+      "fonte": "conteudo/sao-paulo-sp.md",
+      "texto_atualizado_em": "2026-11-02"
+    },
+    {
+      "id": "remoto",
+      "titulo": "Atendimento Remoto",
+      "url": "/atendimento-remoto/",
+      "tipo": "diretorio",
+      "conteudo_status": "redigido",
+      "contato_principal": null,
+      "contatos_cards": [
+        "bernardo",
+        "raphael"
+      ],
+      "whatsapp_flutuante": null,
+      "fonte": "conteudo/atendimento-remoto.md",
+      "texto_atualizado_em": "2026-11-02"
+    },
+    {
+      "id": "artigo-preferencia",
+      "titulo": "Já pensou por que você busca um psicólogo homem?",
+      "url": "/artigos/ja-pensou-por-que-voce-busca-um-psicologo-homem/",
+      "tipo": "artigo",
+      "fonte": "ja-pensou-por-que-voce-busca-um-psicologo-homem.md",
+      "conteudo_status": "redigido_revisar_extensao",
+      "contato_principal": "arranjos",
+      "whatsapp_flutuante": "arranjos"
+    },
+    {
+      "id": "artigo-homens",
+      "titulo": "Para homens que buscam terapia",
+      "url": "/artigos/para-homens-que-buscam-terapia/",
+      "tipo": "artigo",
+      "fonte": "para-homens-que-buscam-terapia.md",
+      "conteudo_status": "redigido_revisar_extensao",
+      "contato_principal": "arranjos",
+      "whatsapp_flutuante": "arranjos"
+    },
+    {
+      "id": "artigo-mulheres",
+      "titulo": "Para mulheres que buscam um psicólogo homem",
+      "url": "/artigos/para-mulheres-que-buscam-um-psicologo-homem/",
+      "tipo": "artigo",
+      "fonte": "para-mulheres-que-buscam-um-psicologo-homem.md",
+      "conteudo_status": "redigido_revisar_extensao",
+      "contato_principal": "arranjos",
+      "whatsapp_flutuante": "arranjos"
+    },
+    {
+      "id": "artigo-escolha",
+      "titulo": "Como escolher um psicólogo com quem você se sinta à vontade?",
+      "url": "/artigos/como-escolher-um-psicologo/",
+      "tipo": "artigo",
+      "fonte": "briefings/como-escolher-um-psicologo-com-quem-voce-se-sinta-a-vontade.md",
+      "conteudo_status": "briefing_proposto_titulo_provisorio",
+      "contato_principal": "arranjos",
+      "whatsapp_flutuante": "arranjos"
+    },
+    {
+      "id": "privacidade",
+      "titulo": "Privacidade",
+      "url": "/privacidade/",
+      "tipo": "apoio",
+      "conteudo_status": "rascunho_tecnico_para_revisao",
+      "contato_principal": "arranjos",
+      "whatsapp_flutuante": "arranjos",
+      "fonte": "conteudo/privacidade.md"
+    }
+  ]
+}

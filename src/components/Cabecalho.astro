@@ -1,0 +1,172 @@
+---
+/** Cabeçalho com a marca e o menu: Início, Sobre, Profissionais e Artigos (submenu). */
+import Marca from './Marca.astro';
+import Icone from './Icone.astro';
+import { dadosSite } from '../lib/dados';
+import { url } from '../lib/caminhos';
+
+interface Props { rotaAtual: string }
+const { rotaAtual } = Astro.props;
+
+interface ItemMenu { rotulo: string; url: string | null; tipo?: string; itens?: { rotulo: string; url: string }[] }
+const menu = dadosSite.menu as ItemMenu[];
+const atual = (u: string | null) => (u && u === rotaAtual ? 'page' : undefined);
+const artigoAtivo = (i: ItemMenu) => i.itens?.some((s) => s.url === rotaAtual);
+---
+<header class="cabecalho" data-cabecalho>
+  <div class="recipiente cabecalho__barra">
+    <a class="cabecalho__marca" href={url('/')}>
+      <Marca />
+      <span class="visualmente-oculto">Psicólogo Homem — página inicial</span>
+    </a>
+
+    <button class="cabecalho__alternar" type="button" aria-expanded="false" aria-controls="menu-principal" data-alternar-menu hidden>
+      <Icone nome="menu" classe="icone-abrir" />
+      <Icone nome="fechar" classe="icone-fechar" />
+      <span>Menu</span>
+    </button>
+
+    <nav class="navegacao" id="menu-principal" aria-label="Principal" data-menu>
+      <ul class="navegacao__lista">
+        {menu.map((item) =>
+          item.tipo === 'submenu' ? (
+            <li class="navegacao__item navegacao__item--sub" data-submenu>
+              <button class="navegacao__link navegacao__botao" type="button" aria-expanded="false" aria-controls="submenu-artigos" data-alternar-submenu data-ativo={artigoAtivo(item) ? '' : undefined}>
+                {item.rotulo}
+                <span class="navegacao__seta" aria-hidden="true"></span>
+              </button>
+              <ul class="submenu" id="submenu-artigos">
+                {item.itens?.map((s) => (
+                  <li><a class="submenu__link" href={url(s.url)} aria-current={atual(s.url)}>{s.rotulo}</a></li>
+                ))}
+              </ul>
+            </li>
+          ) : (
+            <li class="navegacao__item">
+              <a class="navegacao__link" href={url(item.url ?? '/')} aria-current={atual(item.url)}>{item.rotulo}</a>
+            </li>
+          )
+        )}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  import { iniciarMenu } from '../scripts/menu';
+  iniciarMenu();
+</script>
+
+<style>
+  .cabecalho {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--ph-giz);
+    border-bottom: var(--ph-borda);
+  }
+  .cabecalho__barra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: var(--ph-altura-cabecalho);
+  }
+  .cabecalho__marca { display: inline-flex; padding-block: 8px; border-radius: 4px; }
+  .cabecalho__marca :global(.marca) { width: auto; height: 34px; }
+  @media (max-width: 374px) {
+    .cabecalho__barra { gap: 8px; }
+    .cabecalho__marca :global(.marca) { height: 28px; }
+  }
+  @media (min-width: 768px) { .cabecalho__marca :global(.marca) { height: 40px; } }
+
+  .cabecalho__alternar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    min-width: 48px;
+    padding: 8px 12px;
+    margin-right: -12px;
+    border: 0;
+    background: transparent;
+    color: var(--ph-azul);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: var(--ph-raio-botao);
+  }
+  .cabecalho__alternar :global(.icone-fechar) { display: none; }
+  .cabecalho__alternar[aria-expanded='true'] :global(.icone-abrir) { display: none; }
+  .cabecalho__alternar[aria-expanded='true'] :global(.icone-fechar) { display: inline-block; }
+
+  .navegacao__lista, .submenu { list-style: none; margin: 0; padding: 0; }
+  .navegacao__item { margin: 0; }
+  .navegacao__link, .submenu__link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 10px 12px;
+    color: var(--ph-azul);
+    font: inherit;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--ph-raio-botao);
+  }
+  .navegacao__link[aria-current='page'],
+  .navegacao__botao[data-ativo],
+  .submenu__link[aria-current='page'] {
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--ph-cobre);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.35em;
+  }
+  .navegacao__link:hover, .submenu__link:hover { background: color-mix(in srgb, var(--ph-pedra) 60%, transparent); }
+  .navegacao__botao { border: 0; background: transparent; cursor: pointer; width: 100%; text-align: left; }
+  .navegacao__seta {
+    width: 8px; height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    margin-left: 4px;
+    transition: transform 0.15s ease;
+  }
+  .navegacao__botao[aria-expanded='true'] .navegacao__seta { transform: rotate(-135deg) translate(-2px, 0); }
+
+  /* Sem JavaScript: menu visível e submenu aberto. Com JavaScript: controlado. */
+  :global(html.js) .submenu { display: none; }
+  :global(html.js) .navegacao__item--sub[data-aberto] .submenu { display: block; }
+
+  @media (max-width: 899px) {
+    :global(html.js) .cabecalho__alternar { display: inline-flex; }
+    .cabecalho__barra { flex-wrap: wrap; }
+    .navegacao { width: 100%; padding-bottom: 12px; }
+    :global(html.js) .navegacao { display: none; }
+    :global(html.js) .navegacao[data-aberto] { display: block; max-height: calc(100vh - var(--ph-altura-cabecalho)); overflow-y: auto; }
+    .navegacao__item + .navegacao__item { border-top: var(--ph-borda); }
+    .navegacao__link, .navegacao__botao { padding-inline: 4px; font-size: 1.0625rem; }
+    .submenu { padding: 0 0 8px 12px; border-left: 2px solid var(--ph-pedra); margin-left: 4px; }
+    .submenu__link { font-size: 1rem; padding-inline: 12px; }
+  }
+
+  @media (min-width: 900px) {
+    .cabecalho__alternar { display: none !important; }
+    .navegacao__lista { display: flex; align-items: center; gap: 4px; }
+    .navegacao__item--sub { position: relative; }
+    .navegacao__botao { width: auto; }
+    .submenu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      width: 340px;
+      padding: 8px;
+      background: var(--ph-giz);
+      border: var(--ph-borda);
+      border-radius: var(--ph-raio-bloco);
+      box-shadow: 0 12px 28px rgb(36 45 50 / 0.12);
+    }
+    .submenu__link { min-height: 44px; line-height: 1.35; }
+  }
+</style>

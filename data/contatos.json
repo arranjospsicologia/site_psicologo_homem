@@ -1,0 +1,150 @@
+{
+  "atualizado_em": "2026-11-02",
+  "rotulo_geral": "Entrar em contato",
+  "destinatarios": {
+    "arranjos": {
+      "nome_saudacao": "Bernardo",
+      "numero_internacional": "5527998331228",
+      "fonte_numero": "https://arranjospsicologia.com.br/",
+      "status_numero": "localizado_em_site_institucional"
+    },
+    "bernardo": {
+      "nome_saudacao": "Bernardo",
+      "numero_internacional": "5527998331228",
+      "fonte_numero": "https://arranjospsicologia.com.br/",
+      "vinculo_com_contato_geral": "informado_pelo_usuario"
+    },
+    "raphael": {
+      "nome_saudacao": "Raphael",
+      "numero_internacional": null,
+      "status_numero": "consolidar_dado_confirmado_sem_substituicao_automatica",
+      "exibicao_enquanto_pendente": "Botão desativado, sem link, com o aviso “Informação pendente”"
+    }
+  },
+  "mensagens": {
+    "home": "Olá, Bernardo! Vim pela página inicial do Psicólogo Homem e queria saber mais sobre o atendimento.",
+    "sobre": "Olá, Bernardo! Li a página Sobre Nós do Psicólogo Homem e queria conversar sobre atendimento.",
+    "vitoria": "Olá, Bernardo! Vim pela sua página de Vitória no Psicólogo Homem e queria saber sobre o atendimento presencial.",
+    "saopaulo-raphael": "Olá, Raphael! Vim pela sua página de São Paulo no Psicólogo Homem e queria saber sobre o atendimento presencial.",
+    "saopaulo-bernardo": "Olá, Bernardo! Vim pela página de São Paulo do Psicólogo Homem e queria informações sobre atendimento com o Raphael.",
+    "remoto-bernardo": "Olá, Bernardo! Encontrei seu perfil na página de atendimento remoto do Psicólogo Homem e queria saber sobre terapia online.",
+    "remoto-raphael": "Olá, Raphael! Encontrei seu perfil na página de atendimento remoto do Psicólogo Homem e queria saber sobre terapia online.",
+    "privacidade": "Olá, Bernardo! Vim pela página de privacidade do Psicólogo Homem e fiquei com uma dúvida.",
+    "rodape": "Olá, Bernardo! Vim pela página “{nome_da_pagina}” do Psicólogo Homem e fiquei com uma dúvida.",
+    "artigo-preferencia": "Olá, Bernardo! Li o texto “Já pensou por que você busca um psicólogo homem?” no Psicólogo Homem e queria saber mais sobre o atendimento.",
+    "artigo-homens": "Olá, Bernardo! Li o texto “Para homens que buscam terapia” no Psicólogo Homem e queria saber mais sobre o atendimento.",
+    "artigo-mulheres": "Olá, Bernardo! Li o texto “Para mulheres que buscam um psicólogo homem” no Psicólogo Homem e queria saber mais sobre o atendimento.",
+    "artigo-escolha": "Olá, Bernardo! Li o texto “Como escolher um psicólogo com quem você se sinta à vontade?” no Psicólogo Homem e queria saber mais sobre o atendimento."
+  },
+  "paginas": {
+    "home": {
+      "principal": {
+        "destinatario": "arranjos",
+        "mensagem": "home"
+      },
+      "flutuante": {
+        "destinatario": "arranjos",
+        "mensagem": "home"
+      }
+    },
+    "sobre": {
+      "principal": {
+        "destinatario": "arranjos",
+        "mensagem": "sobre"
+      },
+      "flutuante": {
+        "destinatario": "arranjos",
+        "mensagem": "sobre"
+      }
+    },
+    "vitoria": {
+      "principal": {
+        "destinatario": "bernardo",
+        "mensagem": "vitoria"
+      },
+      "flutuante": {
+        "destinatario": "bernardo",
+        "mensagem": "vitoria"
+      }
+    },
+    "saopaulo": {
+      "principal": {
+        "destinatario": "raphael",
+        "mensagem": "saopaulo-raphael"
+      },
+      "flutuante": {
+        "destinatario": "bernardo",
+        "mensagem": "saopaulo-bernardo"
+      }
+    },
+    "remoto": {
+      "principal": null,
+      "flutuante": null,
+      "cards": {
+        "bernardo": {
+          "destinatario": "bernardo",
+          "mensagem": "remoto-bernardo"
+        },
+        "raphael": {
+          "destinatario": "raphael",
+          "mensagem": "remoto-raphael"
+        }
+      }
+    },
+    "privacidade": {
+      "principal": {
+        "destinatario": "arranjos",
+        "mensagem": "privacidade"
+      },
+      "flutuante": {
+        "destinatario": "arranjos",
+        "mensagem": "privacidade"
+      }
+    },
+    "artigo-preferencia": {
+      "principal": {
+        "destinatario": "arranjos",
+        "mensagem": "artigo-preferencia"
+      },
+      "flutuante": {
+        "destinatario": "arranjos",
+        "mensagem": "artigo-preferencia"
+      }
+    },
+    "artigo-homens": {
+      "principal": {
+        "destinatario": "arranjos",
+        "mensagem": "artigo-homens"
+      },
+      "flutuante": {
+        "destinatario": "arranjos",
+        "mensagem": "artigo-homens"
+      }
+    },
+    "artigo-mulheres": {
+      "principal": {
+        "destinatario": "arranjos",
+        "mensagem": "artigo-mulheres"
+      },
+      "flutuante": {
+        "destinatario": "arranjos",
+        "mensagem": "artigo-mulheres"
+      }
+    },
+    "artigo-escolha": {
+      "principal": {
+        "destinatario": "arranjos",
+        "mensagem": "artigo-escolha"
+      },
+      "flutuante": {
+        "destinatario": "arranjos",
+        "mensagem": "artigo-escolha"
+      }
+    }
+  },
+  "rodape": {
+    "destinatario": "arranjos",
+    "mensagem": "rodape"
+  },
+  "envio_automatico": false
+}

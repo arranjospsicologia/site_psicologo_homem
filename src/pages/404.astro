@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/caminhos';
+---
+<Base paginaId="404" tipoPagina="apoio">
+  <section class="abertura">
+    <div class="recipiente leitura">
+      <h1>Página não encontrada</h1>
+      <p>O endereço pode ter mudado ou não existir mais. Você pode continuar por aqui:</p>
+      <div class="acoes">
+        <a class="botao" href={url('/')}>Ir para a página inicial</a>
+        <a class="botao botao--secundario" href={url('/atendimento-remoto/')}>Conhecer os profissionais</a>
+      </div>
+    </div>
+  </section>
+</Base>

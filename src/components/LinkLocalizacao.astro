@@ -1,0 +1,21 @@
+---
+/** "Ver localização": abre o endereço confirmado no mapa. */
+import Icone from './Icone.astro';
+import Pendente from './Pendente.astro';
+import type { Profissional } from '../lib/dados';
+interface Props { profissional: Profissional; rotulo: string }
+const { profissional, rotulo } = Astro.props;
+const endereco = profissional.endereco_presencial?.replace(/\s+—\s+[^,]*Tower/, '');
+const href = endereco ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(endereco)}` : null;
+---
+{href ? (
+  <a class="botao botao--secundario" href={href} target="_blank" rel="noopener noreferrer">
+    <Icone nome="localizacao" />
+    <span>{rotulo}<span class="visualmente-oculto"> (abre o mapa em nova aba)</span></span>
+  </a>
+) : (
+  <span class="acao-pendente">
+    <span class="botao botao--secundario" aria-disabled="true"><Icone nome="localizacao" />{rotulo}</span>
+    <Pendente descricao={`Localização de ${profissional.nome_exibicao}`} />
+  </span>
+)}

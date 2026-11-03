@@ -1,0 +1,49 @@
+---
+/** Serviços confirmados do profissional, com modalidade de cada oferta. */
+import Icone from './Icone.astro';
+import { rotuloServico, textoModalidades, type Profissional } from '../lib/dados';
+import Pendente from './Pendente.astro';
+interface Props { profissional: Profissional; rotulo?: string; compacto?: boolean; nivel?: 'h3' | 'p' }
+const { profissional, rotulo = 'Serviços oferecidos', compacto = false, nivel = 'h3' } = Astro.props;
+const Titulo = nivel;
+---
+<div class:list={['servicos', compacto && 'servicos--compacto']}>
+  <Titulo class="servicos__titulo">{rotulo}</Titulo>
+  {profissional.servicos.length ? (
+    <ul class="servicos__lista">
+      {profissional.servicos.map((o) => (
+        <li>
+          <span class="servicos__nome">{rotuloServico(o.servico_id)}</span>
+          <span class="servicos__modalidade">
+            {o.modalidades.includes('online') && <Icone nome="online" classe="ph-icon--p" />}
+            {o.modalidades.includes('presencial') && <Icone nome="presencial" classe="ph-icon--p" />}
+            {textoModalidades(o.modalidades)}
+          </span>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <Pendente descricao={`Serviços de ${profissional.nome_exibicao}`} />
+  )}
+</div>
+
+<style>
+  .servicos { margin: 0 0 28px; }
+  .servicos__titulo { font-size: 1.0625rem; margin: 0 0 10px; color: var(--ph-azul); font-weight: 600; }
+  .servicos__lista { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; border-top: var(--ph-borda); }
+  .servicos__lista li {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2px 16px;
+    padding: 10px 0;
+    border-bottom: var(--ph-borda);
+  }
+  .servicos__nome { font-weight: 500; }
+  .servicos__modalidade { display: inline-flex; align-items: center; gap: 6px; color: var(--ph-grafite); font-size: 0.9375rem; }
+  .servicos--compacto .servicos__titulo { font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ph-cinza); margin-bottom: 6px; }
+  .servicos--compacto .servicos__lista li { padding: 6px 0; font-size: 0.9375rem; }
+  .servicos--compacto .servicos__modalidade { font-size: 0.875rem; }
+</style>

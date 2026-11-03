@@ -1,0 +1,24 @@
+/* Psicólogo Homem — Presença. Revisão de 30/10/2026. */
+:root {
+  --ph-azul: #223846;
+  --ph-giz: #f3f0e9;
+  --ph-pedra: #dad4c9;
+  --ph-grafite: #242d32;
+  --ph-cobre: #96583f;
+  --ph-cinza: #5b6568;
+  --ph-fundo: var(--ph-giz);
+  --ph-texto: var(--ph-grafite);
+  --ph-texto-secundario: var(--ph-cinza);
+  --ph-acao: var(--ph-azul);
+  --ph-acao-texto: var(--ph-giz);
+  --ph-foco: var(--ph-azul);
+  --ph-fonte-marca: 'Manrope', Arial, sans-serif;
+  --ph-fonte-interface: 'Manrope', Arial, sans-serif;
+  --ph-fonte-editorial: 'Lora', Georgia, serif;
+  --ph-unidade: 8px;
+  --ph-raio-botao: 6px;
+  --ph-raio-bloco: 8px;
+  --ph-largura-conteudo: 1120px;
+  --ph-largura-leitura: 66ch;
+  --ph-altura-acao: 48px;
+}

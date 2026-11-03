@@ -1,0 +1,90 @@
+---
+/** Artigos: rota por página cadastrada em data/paginas.json (tipo "artigo"). */
+import Base from '../../layouts/Base.astro';
+import BotaoContato from '../../components/BotaoContato.astro';
+import Pendente from '../../components/Pendente.astro';
+import Icone from '../../components/Icone.astro';
+import { lerArtigo } from '../../lib/conteudo';
+import { contatoDaPagina } from '../../lib/contatos';
+import { paginas, profissionais, dadosSite, seoDe, type Pagina } from '../../lib/dados';
+import { url, urlAbsoluta } from '../../lib/caminhos';
+
+export function getStaticPaths() {
+  return paginas
+    .filter((p) => p.tipo === 'artigo')
+    .map((p) => ({ params: { slug: p.url.replace(/^\/artigos\/|\/$/g, '') }, props: { pagina: p } }));
+}
+
+interface Props { pagina: Pagina }
+const { pagina: p } = Astro.props;
+const emBriefing = p.conteudo_status.startsWith('briefing');
+const artigo = emBriefing ? null : lerArtigo(p.fonte!);
+const titulo = artigo?.titulo ?? p.titulo;
+
+const nomeAutor = (dadosSite as { artigos?: { autoria?: string } }).artigos?.autoria ?? 'Bernardo Carielo';
+const autor = profissionais.find((x) => x.nome_exibicao === nomeAutor);
+const contato = contatoDaPagina(p.id, 'principal')!;
+const outros = paginas.filter((x) => x.tipo === 'artigo' && x.id !== p.id);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: titulo,
+  description: seoDe(p.id).descricao,
+  inLanguage: 'pt-BR',
+  mainEntityOfPage: urlAbsoluta(p.url, Astro.site),
+  author: { '@type': 'Person', name: nomeAutor, jobTitle: 'Psicólogo', url: autor ? urlAbsoluta(autor.pagina_local, Astro.site) : undefined },
+  publisher: { '@type': 'Organization', name: 'Psicólogo Homem' },
+};
+---
+<Base paginaId={p.id} tipoPagina="artigo" tipoOg="article" jsonLd={emBriefing ? undefined : jsonLd}>
+  <article class="artigo">
+    <header class="artigo__cabecalho">
+      <div class="recipiente">
+        <p class="artigo__sobretitulo"><Icone nome="artigos" classe="ph-icon--p" />Artigo</p>
+        <h1 class="artigo__titulo">{titulo}</h1>
+        <p class="artigo__autoria">
+          Por <a href={autor ? url(autor.pagina_local) : undefined}>{nomeAutor}</a>{autor?.crp && <>, psicólogo · CRP {autor.crp}</>}
+        </p>
+      </div>
+    </header>
+    <div class="recipiente">
+      <div class="artigo__corpo">
+        {artigo ? <Fragment set:html={artigo.html} /> : (
+          <p><Pendente descricao={`Texto do artigo “${titulo}”`} /></p>
+        )}
+      </div>
+      <aside class="artigo__contato" aria-label="Contato">
+        <BotaoContato contato={contato} rotulo="Entrar em contato" paginaId={p.id} tipoPagina="artigo" posicionamento="conteudo" />
+      </aside>
+      <nav class="artigo__outros" aria-labelledby="outros-textos">
+        <h2 id="outros-textos">Leia também</h2>
+        <ul>
+          {outros.map((o) => <li><a href={url(o.url)}>{o.titulo}</a></li>)}
+        </ul>
+      </nav>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .artigo__cabecalho { padding-block: 40px 32px; border-bottom: var(--ph-borda); margin-bottom: 36px; }
+  .artigo__sobretitulo { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ph-cobre); }
+  .artigo__titulo { font-family: var(--ph-fonte-editorial); font-weight: 500; letter-spacing: 0; max-width: 22ch; font-size: clamp(2rem, 1.5rem + 2.4vw, 3rem); }
+  .artigo__autoria { margin: 0; color: var(--ph-cinza); font-size: 0.9375rem; }
+  .artigo__corpo { max-width: var(--ph-largura-leitura); font-size: 1.125rem; line-height: 1.75; }
+  .artigo__corpo :global(h2) { font-family: var(--ph-fonte-editorial); font-weight: 500; font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.75rem); margin-top: 1.8em; }
+  .artigo__corpo :global(h2::before) { display: none; }
+  .artigo__corpo :global(ul) { padding-left: 1.2em; }
+  .artigo__corpo :global(li::marker) { color: var(--ph-cobre); }
+  .artigo__contato { max-width: var(--ph-largura-leitura); padding: 24px 0 8px; margin-top: 12px; border-top: 2px solid var(--ph-cobre); }
+  .artigo__outros { max-width: var(--ph-largura-leitura); padding-block: 32px 56px; }
+  .artigo__outros h2 { font-size: 1.125rem; }
+  .artigo__outros h2::before { display: none; }
+  .artigo__outros ul { padding-left: 1.1em; }
+  .artigo__outros li { margin-bottom: 0.4em; }
+  @media (min-width: 768px) {
+    .artigo__cabecalho { padding-block: 64px 40px; margin-bottom: 48px; }
+    .artigo__corpo { font-size: 1.1875rem; }
+  }
+</style>

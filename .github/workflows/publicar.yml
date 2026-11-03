@@ -1,0 +1,62 @@
+# Publica o site no GitHub Pages a cada push na branch main que mude o site.
+# Pushes que só mexem em documentação do repositório (.github/README.md,
+# .env.example) não disparam publicação. Para forçar, use "Run workflow"
+# na aba Actions. O jeito normal de publicar é `npm run deploy` (scripts/deploy.mjs).
+# Em Settings → Pages, selecione "GitHub Actions" como fonte.
+# Configurações em Settings → Secrets and variables → Actions → Variables
+# (todas opcionais; sem elas, usa o endereço padrão do GitHub Pages de projeto):
+#   PUBLIC_SITE_URL           ex.: https://psicologohomem.com.br
+#   PUBLIC_BASE_PATH          ex.: / (domínio próprio ou repositório USUARIO.github.io)
+#   PUBLIC_DEPLOY_TARGET      github-pages | dominio
+#   PUBLIC_INDEXABLE          true só no lançamento público
+#   PUBLIC_GA_MEASUREMENT_ID  G-XXXXXXXXXX
+#   PUBLIC_ANALYTICS_ENABLED  true para ativar o GA4 (após permissão do visitante)
+name: Publicar no GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '.github/README.md'
+      - '.env.example'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o repositório
+        uses: actions/checkout@v7
+      - name: Instalar, verificar, gerar e enviar o site
+        uses: withastro/action@v6
+        with:
+          node-version: 24
+          build-cmd: npm run check && npm run build
+        env:
+          ASTRO_TELEMETRY_DISABLED: 1
+          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL || format('https://{0}.github.io', github.repository_owner) }}
+          PUBLIC_BASE_PATH: ${{ vars.PUBLIC_BASE_PATH || format('/{0}/', github.event.repository.name) }}
+          PUBLIC_DEPLOY_TARGET: ${{ vars.PUBLIC_DEPLOY_TARGET || 'github-pages' }}
+          PUBLIC_INDEXABLE: ${{ vars.PUBLIC_INDEXABLE || 'false' }}
+          PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID }}
+          PUBLIC_ANALYTICS_ENABLED: ${{ vars.PUBLIC_ANALYTICS_ENABLED || 'false' }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

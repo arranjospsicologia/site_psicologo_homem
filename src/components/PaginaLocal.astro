@@ -1,0 +1,57 @@
+---
+/** Página local de um profissional (Vitória, São Paulo e futuras cidades). */
+import Base from '../layouts/Base.astro';
+import Secoes from './Secoes.astro';
+import BotaoContato from './BotaoContato.astro';
+import RedesSociais from './RedesSociais.astro';
+import LinkLocalizacao from './LinkLocalizacao.astro';
+import ServicosOferecidos from './ServicosOferecidos.astro';
+import Endereco from './Endereco.astro';
+import Retrato from './Retrato.astro';
+import { lerDocumento, textoFonte } from '../lib/conteudo';
+import { contatoDaPagina } from '../lib/contatos';
+import { pagina, profissional as profDe } from '../lib/dados';
+import { urlAbsoluta } from '../lib/caminhos';
+
+interface Props { paginaId: string }
+const { paginaId } = Astro.props;
+const p = pagina(paginaId);
+const prof = profDe(p.profissional!);
+const doc = lerDocumento(textoFonte(p.fonte!));
+const contato = contatoDaPagina(paginaId, 'principal')!;
+const primeiroNome = prof.nome_exibicao.split(' ')[0];
+const rotuloConversar = `Conversar com ${primeiroNome}`;
+
+const acoes = (i: number) => ({
+  [rotuloConversar]: { C: BotaoContato, props: { contato, rotulo: rotuloConversar, paginaId, tipoPagina: p.tipo, posicionamento: i === 0 ? 'abertura' : 'perfil', profissionalId: prof.id } },
+  'Conhecer suas redes sociais': { C: RedesSociais, props: { profissional: prof, paginaId } },
+  'Ver localização': { C: LinkLocalizacao, props: { profissional: prof, rotulo: 'Ver localização' } },
+});
+const comentarios = [
+  { padrao: /componente Serviços oferecidos/i, C: ServicosOferecidos, props: { profissional: prof } },
+  { padrao: /^Componente de endereço/i, C: Endereco, props: { profissional: prof } },
+];
+const secaoConheca = doc.secoes.find((s) => s.titulo?.startsWith('Conheça'))?.id ?? '';
+const secaoPresencial = doc.secoes.find((s) => s.titulo?.startsWith('Atendimento presencial'))?.id ?? '';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: prof.nome_exibicao,
+  jobTitle: 'Psicólogo',
+  identifier: prof.crp ? `CRP ${prof.crp}` : undefined,
+  knowsAbout: prof.abordagem,
+  address: { '@type': 'PostalAddress', addressLocality: prof.cidade, addressRegion: prof.uf, addressCountry: 'BR' },
+  url: urlAbsoluta(p.url, Astro.site),
+  sameAs: prof.redes?.map((r) => r.url),
+};
+---
+<Base paginaId={paginaId} tipoPagina={p.tipo} profissionalId={prof.id} imagemOg={`/og/${prof.id}.jpg`} tipoOg="profile" jsonLd={jsonLd}>
+  <Secoes
+    doc={doc}
+    acoes={acoes}
+    comentarios={comentarios}
+    laterais={{ [secaoConheca]: { C: Retrato, props: { profissional: prof, tamanhos: '(min-width: 900px) 340px, min(360px, 100vw)', prioridade: false } } }}
+    destaque={[secaoPresencial]}
+  />
+</Base>

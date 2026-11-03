@@ -1,0 +1,14 @@
+---
+/** Assinatura horizontal oficial, em contornos vetoriais. */
+import horizontal from '../../identidade-visual/logotipo/marca-horizontal.svg?raw';
+import reversa from '../../identidade-visual/logotipo/marca-horizontal-reversa.svg?raw';
+interface Props { variante?: 'principal' | 'reversa'; classe?: string }
+const { variante = 'principal', classe = 'marca' } = Astro.props;
+const fonte = variante === 'reversa' ? reversa : horizontal;
+const html = fonte
+  .replace(/<title[\s\S]*?<\/title>/, '')
+  .replace(/<desc[\s\S]*?<\/desc>/, '')
+  .replace(/^<svg\b([^>]*)>/, (_m, attrs: string) =>
+    `<svg${attrs.replace(/\s(width|height|role|aria-labelledby)="[^"]*"/g, '')} class="${classe}" aria-hidden="true" focusable="false">`);
+---
+<Fragment set:html={html} />

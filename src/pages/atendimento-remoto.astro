@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import Secoes from '../components/Secoes.astro';
+import ListaProfissionais from '../components/ListaProfissionais.astro';
+import { lerDocumento, textoFonte, paragrafos } from '../lib/conteudo';
+import { pagina } from '../lib/dados';
+
+const p = pagina('remoto');
+const doc = lerDocumento(textoFonte(p.fonte!));
+const secaoLista = doc.secoes.find((s) => s.titulo === 'Escolha com quem conversar');
+if (!secaoLista?.id) throw new Error('Seção da listagem não encontrada em atendimento-remoto.md');
+// Linhas de opções ("Todos · ...") são instruções de composição; as opções vêm do cadastro.
+const [textoLocalizacao, textoCombinacao] = paragrafos(secaoLista).filter((h) => !/^<p>Todos\b/.test(h));
+---
+<Base paginaId="remoto" tipoPagina={p.tipo}>
+  <Secoes
+    doc={doc}
+    substituir={{ [secaoLista.id]: { C: ListaProfissionais, props: { textoLocalizacao, textoCombinacao } } }}
+  />
+</Base>

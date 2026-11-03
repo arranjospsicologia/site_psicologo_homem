@@ -1,0 +1,71 @@
+---
+/**
+ * Estrutura comum das páginas de serviço: a primeira seção (com o H1) é a
+ * abertura; cada H2 abre uma nova seção. Permite colocar um elemento lateral
+ * (ex.: retrato) ou substituir o conteúdo de uma seção por um componente.
+ */
+import Blocos from './Blocos.astro';
+import type { Documento, Secao } from '../lib/conteudo';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Comp = { C: any; props?: Record<string, unknown> };
+interface Props {
+  doc: Documento;
+  /** Controles por rótulo; uma função permite variar por seção (0 = abertura). */
+  acoes?: Record<string, Comp> | ((indiceSecao: number) => Record<string, Comp>);
+  comentarios?: { padrao: RegExp; C: Comp['C']; props?: Record<string, unknown> }[];
+  /** Elemento lateral por id de seção ("abertura" para a primeira). */
+  laterais?: Record<string, Comp>;
+  /** Componente que substitui os blocos de uma seção. */
+  substituir?: Record<string, Comp>;
+  /** Seções com fundo pedra. */
+  destaque?: string[];
+}
+const { doc, acoes, comentarios, laterais = {}, substituir = {}, destaque = [] } = Astro.props;
+const idDe = (s: Secao, i: number) => (i === 0 ? 'abertura' : s.id ?? `secao-${i}`);
+---
+{doc.secoes.map((s, i) => {
+  const id = idDe(s, i);
+  const lateral = laterais[id];
+  const troca = substituir[id];
+  const corpo = troca
+    ? <troca.C {...troca.props} />
+    : <Blocos blocos={s.blocos} acoes={typeof acoes === 'function' ? acoes(i) : acoes} comentarios={comentarios} />;
+  if (i === 0) {
+    return (
+      <section class:list={['abertura', lateral && 'abertura--lateral']} aria-labelledby="titulo-pagina">
+        <div class="recipiente abertura__grade">
+          <div class="abertura__texto leitura">
+            {doc.h1 && <h1 id="titulo-pagina" set:html={doc.h1} />}
+            {corpo}
+          </div>
+          {lateral && <div class="abertura__lateral"><lateral.C {...lateral.props} /></div>}
+        </div>
+      </section>
+    );
+  }
+  return (
+    <section class:list={['secao', destaque.includes(id) && 'secao--pedra']} id={id} aria-labelledby={`t-${id}`}>
+      <div class:list={['recipiente', lateral && 'secao__grade']}>
+        {lateral && <div class="secao__lateral"><lateral.C {...lateral.props} /></div>}
+        <div class:list={[!troca && 'leitura']}>
+          {s.tituloHtml && <h2 id={`t-${id}`} set:html={s.tituloHtml} />}
+          {corpo}
+        </div>
+      </div>
+    </section>
+  );
+})}
+
+<style>
+  .abertura__grade { display: grid; gap: 32px; }
+  .abertura__lateral { display: none; }
+  .secao__grade { display: grid; gap: 28px; }
+  .secao__lateral { max-width: 360px; }
+  @media (min-width: 900px) {
+    .abertura--lateral .abertura__grade { grid-template-columns: minmax(0, 1fr) 380px; align-items: center; gap: 64px; }
+    .abertura__lateral { display: block; }
+    .secao__grade { grid-template-columns: 340px minmax(0, 1fr); gap: 56px; align-items: start; }
+    .secao__lateral { position: sticky; top: calc(var(--ph-altura-cabecalho) + 24px); }
+  }
+</style>

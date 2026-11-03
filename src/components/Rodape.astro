@@ -1,0 +1,94 @@
+---
+/** Rodapé comum a todas as páginas, a partir de conteudo/componentes/rodape.md. */
+import Marca from './Marca.astro';
+import { lerDocumento, textoFonte } from '../lib/conteudo';
+import { contatoDoRodape } from '../lib/contatos';
+import { analytics } from '../lib/config';
+import { url } from '../lib/caminhos';
+
+interface Props { paginaId: string; tipoPagina: string; nomeDaPagina: string }
+const { paginaId, tipoPagina, nomeDaPagina } = Astro.props;
+
+const doc = lerDocumento(textoFonte('conteudo/componentes/rodape.md'));
+const blocos = doc.secoes.flatMap((s) => s.blocos);
+const contato = contatoDoRodape(nomeDaPagina);
+
+const atributos = [
+  `href="${contato.href}"`,
+  'target="_blank" rel="noopener noreferrer"',
+  'data-evento="contact_click"',
+  `data-page-id="${paginaId}"`,
+  `data-page-type="${tipoPagina}"`,
+  'data-placement="rodape"',
+  `data-recipient-id="${contato.destinatarioId}"`,
+].join(' ');
+
+const paragrafosHtml = blocos
+  .filter((b) => b.tipo === 'html')
+  .map((b) => (b as { html: string }).html.replace(
+    /<strong>([^<]*contato[^<]*)<\/strong>/i,
+    (_m, t: string) => `<a ${atributos}>${t}<span class="visualmente-oculto"> (abre o WhatsApp em nova aba)</span></a>`,
+  ));
+const links = blocos.find((b) => b.tipo === 'links');
+const itensLinks = links && links.tipo === 'links' ? links.itens : [];
+const ano = new Date().getFullYear();
+---
+<footer class="rodape" data-rodape>
+  <div class="recipiente rodape__grade">
+    <div class="rodape__marca">
+      <Marca variante="reversa" />
+    </div>
+    <div class="rodape__texto">
+      {paragrafosHtml.map((h) => <Fragment set:html={h} />)}
+    </div>
+    <nav class="rodape__links" aria-label="Referências e documentos">
+      <ul>
+        {itensLinks.map((l) => (
+          <li><a href={url(l.href)} {...(/^https?:/.test(l.href) ? { rel: 'noopener' } : {})}>{l.rotulo}</a></li>
+        ))}
+        {analytics.ativo && (
+          <li><button class="rodape__preferencias" type="button" data-abrir-preferencias>Preferências de privacidade</button></li>
+        )}
+      </ul>
+    </nav>
+    <p class="rodape__direitos">© {ano} Psicólogo Homem</p>
+  </div>
+</footer>
+
+<style>
+  .rodape {
+    background: var(--ph-azul);
+    color: var(--ph-giz);
+    padding-block: 48px calc(96px + env(safe-area-inset-bottom));
+    margin-top: auto;
+  }
+  .rodape :global(a), .rodape__preferencias { color: var(--ph-giz); }
+  .rodape :focus-visible { outline-color: var(--ph-giz); }
+  .rodape__grade { display: grid; gap: 28px; }
+  .rodape__marca :global(.marca) { height: 36px; width: auto; }
+  .rodape__texto :global(p) { margin: 0 0 0.75em; max-width: 60ch; }
+  .rodape__links ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .rodape__links li { margin: 0; }
+  .rodape__links a, .rodape__preferencias {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.9375rem;
+  }
+  .rodape__preferencias {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    font-size: 0.9375rem;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+  }
+  .rodape__direitos { margin: 0; font-size: 0.875rem; opacity: 0.85; }
+  @media (min-width: 900px) {
+    .rodape { padding-block: 64px 72px; }
+    .rodape__grade { grid-template-columns: 1fr 1.4fr 1.2fr; align-items: start; gap: 40px; }
+    .rodape__direitos { grid-column: 1 / -1; border-top: 1px solid color-mix(in srgb, var(--ph-giz) 25%, transparent); padding-top: 20px; }
+  }
+</style>

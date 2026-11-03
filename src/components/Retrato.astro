@@ -1,0 +1,36 @@
+---
+/**
+ * Retrato do profissional, a partir do arquivo mestre em
+ * public/imagens/profissionais/. Entrega derivados AVIF/WebP responsivos;
+ * o PNG mestre não vai para a saída pública.
+ */
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { Profissional } from '../lib/dados';
+
+const mestres = import.meta.glob<{ default: ImageMetadata }>('../../public/imagens/profissionais/*.png', { eager: true });
+
+interface Props { profissional: Profissional; tamanhos: string; prioridade?: boolean; classe?: string }
+const { profissional, tamanhos, prioridade = false, classe } = Astro.props;
+const arquivo = profissional.foto.split('/').pop();
+const mestre = Object.entries(mestres).find(([k]) => k.endsWith(`/${arquivo}`))?.[1].default;
+if (!mestre) throw new Error(`Retrato não encontrado: ${profissional.foto}`);
+---
+<figure class:list={['retrato', classe]}>
+  <Picture
+    src={mestre}
+    alt={profissional.foto_alt}
+    formats={['avif', 'webp']}
+    fallbackFormat="jpg"
+    widths={[280, 400, 560, 800]}
+    sizes={tamanhos}
+    width={800}
+    height={1000}
+    fit="cover"
+    position="top"
+    quality={78}
+    loading={prioridade ? 'eager' : 'lazy'}
+    fetchpriority={prioridade ? 'high' : 'auto'}
+    decoding="async"
+  />
+</figure>

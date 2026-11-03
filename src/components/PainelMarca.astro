@@ -1,0 +1,23 @@
+---
+/** Painel com o símbolo oficial, usado na abertura em telas largas. */
+import simbolo from '../../identidade-visual/logotipo/simbolo.svg?raw';
+const html = simbolo
+  .replace(/<title[\s\S]*?<\/title>/, '')
+  .replace(/^<svg\b([^>]*)>/, (_m, a: string) => `<svg${a.replace(/\s(width|height|role|aria-labelledby|color)="[^"]*"/g, '')} class="painel__simbolo" aria-hidden="true" focusable="false">`);
+---
+<div class="painel" aria-hidden="true">
+  <Fragment set:html={html} />
+</div>
+<style>
+  .painel {
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    background: var(--ph-azul);
+    border-radius: var(--ph-raio-bloco);
+    color: var(--ph-giz);
+  }
+  .painel :global(.painel__simbolo) { width: 58%; height: auto; color: var(--ph-giz); }
+  .painel :global(.painel__simbolo [fill="currentColor"]),
+  .painel :global(.painel__simbolo g) { color: var(--ph-giz); }
+</style>

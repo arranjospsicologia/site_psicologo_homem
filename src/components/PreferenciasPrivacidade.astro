@@ -1,0 +1,52 @@
+---
+/**
+ * Aviso de estatísticas (Consent Mode básico): nada do Google Analytics é
+ * carregado antes de a pessoa permitir. Só existe quando o GA4 está configurado.
+ */
+import { analytics } from '../lib/config';
+import { url } from '../lib/caminhos';
+---
+{analytics.ativo && (
+  <section class="preferencias" aria-labelledby="preferencias-titulo" data-preferencias data-ga-id={analytics.id} hidden>
+    <div class="recipiente preferencias__grade">
+      <div>
+        <h2 id="preferencias-titulo" class="preferencias__titulo">Estatísticas de visita</h2>
+        <p class="preferencias__texto">
+          Podemos medir visitas e cliques de forma agregada, com o Google Analytics, para melhorar o site. Nada é coletado sem a sua permissão e você pode mudar de ideia depois. <a href={url('/privacidade/')}>Saiba mais</a>.
+        </p>
+      </div>
+      <div class="preferencias__acoes">
+        <button class="botao" type="button" data-consentir="permitido">Permitir estatísticas</button>
+        <button class="botao botao--secundario" type="button" data-consentir="recusado">Continuar sem estatísticas</button>
+      </div>
+    </div>
+  </section>
+)}
+
+<script>
+  import { iniciarConsentimento } from '../scripts/analytics';
+  iniciarConsentimento();
+</script>
+
+<style>
+  .preferencias {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 60;
+    background: var(--ph-giz);
+    border-top: 2px solid var(--ph-azul);
+    box-shadow: 0 -8px 24px rgb(36 45 50 / 0.12);
+    padding: 16px 0 calc(16px + env(safe-area-inset-bottom));
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .preferencias__grade { display: grid; gap: 12px; }
+  .preferencias__titulo { font-size: 1.0625rem; margin: 0 0 4px; }
+  .preferencias__titulo::before { display: none; }
+  .preferencias__texto { margin: 0; font-size: 0.9375rem; line-height: 1.5; }
+  .preferencias__acoes { display: grid; gap: 8px; }
+  @media (min-width: 768px) {
+    .preferencias__grade { grid-template-columns: 1fr auto; align-items: center; gap: 24px; }
+    .preferencias__acoes { grid-auto-flow: column; }
+  }
+</style>

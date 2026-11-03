@@ -1,0 +1,348 @@
+{
+  "nome": "Psicólogo Homem",
+  "dominio": "psicologohomem.com.br",
+  "especificado_em": "2026-11-02",
+  "mensagem": "Para você que busca um psicólogo homem",
+  "publico": "Homens e mulheres que, neste momento, preferem conversar com um psicólogo homem",
+  "menu": [
+    {
+      "rotulo": "Início",
+      "url": "/"
+    },
+    {
+      "rotulo": "Sobre",
+      "url": "/sobre/"
+    },
+    {
+      "rotulo": "Profissionais",
+      "url": "/atendimento-remoto/"
+    },
+    {
+      "rotulo": "Artigos",
+      "tipo": "submenu",
+      "url": null,
+      "itens": [
+        {
+          "rotulo": "Já pensou por que você busca um psicólogo homem?",
+          "url": "/artigos/ja-pensou-por-que-voce-busca-um-psicologo-homem/",
+          "status": "redigido_revisar_extensao"
+        },
+        {
+          "rotulo": "Para homens que buscam terapia",
+          "url": "/artigos/para-homens-que-buscam-terapia/",
+          "status": "redigido_revisar_extensao"
+        },
+        {
+          "rotulo": "Para mulheres que buscam um psicólogo homem",
+          "url": "/artigos/para-mulheres-que-buscam-um-psicologo-homem/",
+          "status": "redigido_revisar_extensao"
+        },
+        {
+          "rotulo": "Como escolher um psicólogo com quem você se sinta à vontade?",
+          "url": "/artigos/como-escolher-um-psicologo/",
+          "status": "briefing_proposto_titulo_provisorio"
+        }
+      ]
+    }
+  ],
+  "hub_artigos": false,
+  "rodape": {
+    "todas_as_paginas": true,
+    "organizacao": "Psicólogo Homem é organizado pela Arranjos Psicologia para facilitar o acesso a profissionais de excelência.",
+    "link_organizacao": "arranjos",
+    "ajuda": "Ficou com alguma dúvida? Entre em contato.",
+    "contato": "arranjos",
+    "links_obrigatorios": [
+      "codigo_etica",
+      "atendimento_online",
+      "cadastro_cfp"
+    ],
+    "fonte_texto": "conteudo/componentes/rodape.md"
+  },
+  "listagem": {
+    "pagina": "remoto",
+    "url": "/atendimento-remoto/",
+    "rotulo_menu": "Profissionais",
+    "cobertura_online": "Brasil",
+    "whatsapp_flutuante": false,
+    "campos_card": [
+      "nome",
+      "crp",
+      "cidade",
+      "uf",
+      "descricao",
+      "abordagem",
+      "servicos",
+      "contato",
+      "redes_sociais"
+    ],
+    "redes_sociais_destaque": "secundario",
+    "fonte_cards": "conteudo/componentes/cards-profissionais.md",
+    "filtros": [
+      {
+        "id": "localizacao_profissional",
+        "rotulo": "Localização do profissional",
+        "obrigatorio": true,
+        "selecao": "unica",
+        "valor_inicial": "todos",
+        "opcoes_iniciais": [
+          {
+            "valor": "todos",
+            "rotulo": "Todos"
+          },
+          {
+            "valor": "vitoria-es",
+            "rotulo": "Vitória–ES"
+          },
+          {
+            "valor": "sao-paulo-sp",
+            "rotulo": "São Paulo–SP"
+          }
+        ],
+        "opcoes_dinamicas": "Cidades dos cadastros confirmados incluídos na listagem"
+      },
+      {
+        "id": "servico",
+        "rotulo": "Serviço que você procura",
+        "obrigatorio": true,
+        "selecao": "unica",
+        "valor_inicial": "todos",
+        "opcao_inicial": {
+          "valor": "todos",
+          "rotulo": "Todos os serviços"
+        },
+        "catalogo": "data/servicos.json",
+        "opcoes_dinamicas": "Serviços confirmados online nos cadastros incluídos na listagem"
+      }
+    ],
+    "combinacao_filtros": "E",
+    "limpar_filtros": "Restaurar localização e serviço para todos",
+    "modalidade_considerada_no_filtro_servico": "online",
+    "servicos_no_card": "Todas as ofertas confirmadas, identificando online/presencial por serviço",
+    "ordenacao": {
+      "html_sem_javascript": "alfabetica_por_nome_exibicao",
+      "com_javascript": "aleatoria_por_visita",
+      "persistencia": "sessionStorage; mantém a mesma ordem durante a visita, sem cookie",
+      "filtros": "aplicados sobre a ordem sorteada da visita",
+      "decidido_em": "2026-11-02"
+    }
+  },
+  "profissionais": [
+    {
+      "id": "bernardo",
+      "nome_exibicao": "Bernardo Carielo",
+      "cidade": "Vitória",
+      "uf": "ES",
+      "pagina_local": "/vitoria-es/",
+      "contato": "bernardo",
+      "abordagem": "Abordagem Centrada na Pessoa",
+      "cadastro_detalhado": "parcial_faltam_redes",
+      "foto": "/imagens/profissionais/bernardo-carielo-psicologo-homem-vitoria-es.png",
+      "foto_alt": "Bernardo Carielo, psicólogo em Vitória, ES",
+      "foto_uso": "placeholder_ate_fotografia_definitiva",
+      "servicos": [
+        {
+          "servico_id": "psicoterapia-individual",
+          "modalidades": [
+            "online",
+            "presencial"
+          ]
+        },
+        {
+          "servico_id": "psicoterapia-casais",
+          "modalidades": [
+            "online",
+            "presencial"
+          ]
+        },
+        {
+          "servico_id": "psicoterapia-familias",
+          "modalidades": [
+            "online",
+            "presencial"
+          ]
+        },
+        {
+          "servico_id": "grupos",
+          "modalidades": [
+            "online",
+            "presencial"
+          ]
+        }
+      ],
+      "servicos_status": "confirmado_pelo_usuario_2026-11-02",
+      "servicos_nao_oferecidos": [
+        "psicoterapia-infantil"
+      ],
+      "foto_aviso_publico": false,
+      "crp": "16/5527",
+      "formacao": [
+        "Graduação em Psicologia pela Universidade Federal do Espírito Santo",
+        "Formação em Abordagem Centrada na Pessoa pelo EncontroACP"
+      ],
+      "endereco_presencial": "Rua Darcy Grijó, 50, sala 409 — Edifício Madison Office Tower, Jardim da Penha, Vitória–ES, CEP 29060-500",
+      "redes": [],
+      "redes_status": "a_informar",
+      "fonte_cadastro": "https://psicologobernardo.com.br/"
+    },
+    {
+      "id": "raphael",
+      "nome_exibicao": "Raphael Coimbra",
+      "foto": "/imagens/profissionais/raphael-coimbra-psicologo-homem-sao-paulo-sp.png",
+      "foto_alt": "Raphael Coimbra, psicólogo em São Paulo, SP",
+      "foto_uso": "placeholder_ate_fotografia_definitiva",
+      "cidade": "São Paulo",
+      "uf": "SP",
+      "pagina_local": "/sao-paulo-sp/",
+      "contato": "raphael",
+      "abordagem": "Abordagem Centrada na Pessoa",
+      "cadastro_detalhado": "parcial_faltam_endereco_whatsapp_e_nome_de_registro",
+      "servicos": [
+        {
+          "servico_id": "psicoterapia-individual",
+          "modalidades": [
+            "online",
+            "presencial"
+          ]
+        },
+        {
+          "servico_id": "psicoterapia-casais",
+          "modalidades": [
+            "online",
+            "presencial"
+          ]
+        },
+        {
+          "servico_id": "psicoterapia-familias",
+          "modalidades": [
+            "online",
+            "presencial"
+          ]
+        },
+        {
+          "servico_id": "grupos",
+          "modalidades": [
+            "online",
+            "presencial"
+          ]
+        }
+      ],
+      "servicos_status": "confirmado_pelo_usuario_2026-11-02",
+      "servicos_nao_oferecidos": [
+        "psicoterapia-infantil"
+      ],
+      "foto_aviso_publico": false,
+      "crp": "06/219272",
+      "nome_registro": "a_confirmar",
+      "formacao": [
+        "Formação Avançada em Prática da Psicologia Clínica na Abordagem Centrada na Pessoa",
+        "Especialização em Luto e Rompimento de Vínculos"
+      ],
+      "redes": [
+        {
+          "rede": "instagram",
+          "usuario": "psiraphaelcoimbra",
+          "url": "https://www.instagram.com/psiraphaelcoimbra/"
+        }
+      ],
+      "endereco_presencial": null,
+      "fonte_cadastro": "Perfil do Instagram informado pelo usuário em 2026-11-02"
+    }
+  ],
+  "conteudo_paginas": {
+    "home": "conteudo/home.md",
+    "sobre": "conteudo/sobre.md",
+    "vitoria": "conteudo/vitoria-es.md",
+    "saopaulo": "conteudo/sao-paulo-sp.md",
+    "remoto": "conteudo/atendimento-remoto.md"
+  },
+  "manual_desenvolvimento": "MANUAL-CRIACAO-DO-SITE.md",
+  "design": {
+    "estrategia": "mobile-first",
+    "largura_inicial_px": 360,
+    "largura_minima_a_conferir_px": 320,
+    "aparencia": "clara",
+    "modo_escuro": false
+  },
+  "analytics": {
+    "provedor": "Google Analytics 4",
+    "obrigatorio": true,
+    "measurement_id": null,
+    "status": "a_configurar",
+    "localhost": false,
+    "carregamento": "apos_permissao_para_estatisticas",
+    "consentimento": "basico",
+    "eventos": [
+      "page_view",
+      "contact_click",
+      "professional_filter_change",
+      "social_click"
+    ]
+  },
+  "publicacao": {
+    "inicial": {
+      "provedor": "GitHub Pages",
+      "origem": null,
+      "base_path": null,
+      "repositorio": null,
+      "status": "criar_repositorio_publico_e_identificar_url",
+      "repositorio_visibilidade": "publico",
+      "repositorio_conteudo": "Somente o site: código, configuração, conteudo/, data/ e recursos públicos do build. Ficam fora docs/, briefings/, registros de geração de imagens, estudos de identidade e pacotes ZIP."
+    },
+    "definitiva": {
+      "origem": "https://psicologohomem.com.br",
+      "base_path": "/",
+      "hospedagem_prevista": "GitHub Pages com domínio personalizado",
+      "status": "configurar_na_etapa_do_dominio",
+      "dominio_registro": "registrado em nome de Bernardo Carielo"
+    }
+  },
+  "servicos_catalogo": "data/servicos.json",
+  "expansao": {
+    "objetivo": "Idealmente ao menos um profissional com atendimento presencial em cada capital brasileira, incluindo Brasília",
+    "exclusividade_por_cidade": false,
+    "limita_profissionais_por_cidade": false,
+    "cobertura_completa_obrigatoria_no_lancamento": false,
+    "pagina_local_exige_presenca_real": true,
+    "processo": "Cadastro confirmado, geração estática e nova publicação"
+  },
+  "documento_historico": "docs/historico/DECISOES-ARQUITETURA-2026-09-19.md",
+  "artigos": {
+    "autoria": "Bernardo Carielo",
+    "revisao": "Demais profissionais do projeto; creditar a revisão somente depois de realizada",
+    "revisao_final": "Cada publicação será revisada pelo usuário com o site pronto",
+    "titulo_quarto_artigo": "provisório até a revisão final",
+    "extensao_alvo_palavras": "350–500, proposta de trabalho"
+  },
+  "grupos": {
+    "pagina_dedicada": false,
+    "exibicao": "Apenas como o serviço Coordenação de grupos em cards e páginas locais"
+  },
+  "iconografia": {
+    "status": "aprovada",
+    "aprovado_em": "2026-11-02"
+  },
+  "responsavel_site": {
+    "organizacao": "Arranjos Psicologia",
+    "uso": "Identificação do responsável na política de privacidade",
+    "pendente": "Dados de identificação e canal para solicitações de privacidade"
+  },
+  "informacao_pendente": {
+    "rotulo": "Informação pendente",
+    "regra": "Durante o desenvolvimento, todo dado que falta aparece na interface como placeholder no lugar do campo, com o aviso visível “Informação pendente” ao lado. Nunca preencher com dado presumido nem com o dado de outro profissional.",
+    "contato_sem_numero": "Botão visível e desativado, sem link, com o aviso ao lado",
+    "dados_vazios": "Campos null ou listas vazias com status a_informar/a_confirmar geram o placeholder",
+    "publicacao": "O build lista todos os placeholders restantes; o build indexável (PUBLIC_INDEXABLE=true) falha se houver algum",
+    "campos_atuais": [
+      "raphael.endereco_presencial (e o link Ver localização)",
+      "raphael.whatsapp (botões do perfil e do card)",
+      "bernardo.redes",
+      "artigo-escolha: texto do quarto artigo",
+      "privacidade: dados de identificação da Arranjos Psicologia e canal para solicitações"
+    ],
+    "conferir_sem_placeholder": [
+      "raphael.nome_registro",
+      "PUBLIC_GA_MEASUREMENT_ID"
+    ]
+  }
+}
