@@ -59,12 +59,10 @@ const idDe = (s: Secao, i: number) => (i === 0 ? 'abertura' : s.id ?? `secao-${i
 
 <style>
   .abertura__grade { display: grid; gap: 32px; }
-  .abertura__lateral { display: none; }
   .secao__grade { display: grid; gap: 28px; }
   .secao__lateral { max-width: 360px; }
   @media (min-width: 900px) {
     .abertura--lateral .abertura__grade { grid-template-columns: minmax(0, 1fr) 380px; align-items: center; gap: 64px; }
-    .abertura__lateral { display: block; }
     .secao__grade { grid-template-columns: 340px minmax(0, 1fr); gap: 56px; align-items: start; }
     .secao__lateral { position: sticky; top: calc(var(--ph-altura-cabecalho) + 24px); }
   }

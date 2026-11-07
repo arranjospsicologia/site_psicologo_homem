@@ -5,6 +5,7 @@
 import type { APIRoute } from 'astro';
 import sharp from 'sharp';
 import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 import marcaReversa from '../../../identidade-visual/logotipo/marca-reversa.svg?raw';
 import { profissionais } from '../../lib/dados';
 
@@ -22,7 +23,8 @@ export function getStaticPaths() {
 export const GET: APIRoute = async ({ params }) => {
   const prof = profissionais.find((p) => p.id === params.id)!;
   const fundo = sharp({ create: { width: L, height: A, channels: 3, background: AZUL } });
-  const arquivo = new URL(`../../../public${prof.foto}`, import.meta.url);
+  // Caminho a partir da raiz do projeto (o build roda nela).
+  const arquivo = path.join(process.cwd(), 'public', prof.foto);
   const retrato = await sharp(await readFile(arquivo)).resize(520, A, { fit: 'cover', position: 'top' }).toBuffer();
   const m = await marca(360);
   const meta = await sharp(m).metadata();

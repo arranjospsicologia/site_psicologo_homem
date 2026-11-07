@@ -14,9 +14,9 @@ Esta página explica quais dados podem ser tratados quando você visita o Psicó
 
 O Psicólogo Homem é organizado pela Arranjos Psicologia, responsável por este site e pelas decisões sobre os dados tratados aqui.
 
-{{pendente: Identificação da Arranjos Psicologia (razão social e CNPJ ou dados do responsável)}}
+Arranjos Psicologia Ltda — CNPJ 30.301.409/0001-09.
 
-Para dúvidas ou solicitações sobre seus dados: {{pendente: Canal para solicitações sobre dados pessoais (e-mail)}}
+Para dúvidas ou solicitações sobre seus dados, escreva para [contato@arranjospsicologia.com.br](mailto:contato@arranjospsicologia.com.br).
 
 ## Estatísticas de visita
 

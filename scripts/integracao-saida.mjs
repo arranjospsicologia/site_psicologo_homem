@@ -1,5 +1,5 @@
 // Integração de build: a saída pública não deve conter os retratos mestres
-// (PNGs de vários MB). Eles permanecem em public/imagens/profissionais/ como
+// e de ambiência (PNGs de vários MB). Eles permanecem em public/imagens/ como
 // fonte; o site usa apenas os derivados otimizados gerados pelo Astro.
 import { rm, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -10,11 +10,11 @@ export function removerMestres() {
     name: 'psicologo-homem:remover-mestres',
     hooks: {
       'astro:build:done': async ({ dir, logger }) => {
-        const pasta = path.join(fileURLToPath(dir), 'imagens', 'profissionais');
+        const pasta = path.join(fileURLToPath(dir), 'imagens');
         try {
-          const arquivos = await readdir(pasta);
+          const arquivos = await readdir(pasta, { recursive: true });
           await rm(pasta, { recursive: true, force: true });
-          logger.info(`Retratos mestres removidos da saída: ${arquivos.length}`);
+          logger.info(`Imagens mestras removidas da saída: ${arquivos.filter((a) => /\.\w+$/.test(a)).length}`);
         } catch {
           /* pasta inexistente: nada a remover */
         }

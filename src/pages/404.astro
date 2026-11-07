@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import ImagemAmbiente from '../components/ImagemAmbiente.astro';
 import { url } from '../lib/caminhos';
 ---
 <Base paginaId="404" tipoPagina="apoio">
@@ -11,6 +12,11 @@ import { url } from '../lib/caminhos';
         <a class="botao" href={url('/')}>Ir para a página inicial</a>
         <a class="botao botao--secundario" href={url('/atendimento-remoto/')}>Conhecer os profissionais</a>
       </div>
+      <ImagemAmbiente arquivo="/imagens/paginas/404-caminho.png" variante="detalhe" classe="nao-encontrada__imagem" />
     </div>
   </section>
 </Base>
+
+<style>
+  .abertura :global(.nao-encontrada__imagem) { margin-top: 32px; }
+</style>

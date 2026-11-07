@@ -9,9 +9,10 @@ const html = simbolo
   <Fragment set:html={html} />
 </div>
 <style>
+  .painel { display: none; }
+  @media (min-width: 900px) { .painel { display: grid; } }
   .painel {
     aspect-ratio: 1;
-    display: grid;
     place-items: center;
     background: var(--ph-azul);
     border-radius: var(--ph-raio-bloco);

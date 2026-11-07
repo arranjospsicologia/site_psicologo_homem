@@ -38,9 +38,24 @@
           "status": "redigido_revisar_extensao"
         },
         {
-          "rotulo": "Como escolher um psicólogo com quem você se sinta à vontade?",
-          "url": "/artigos/como-escolher-um-psicologo/",
-          "status": "briefing_proposto_titulo_provisorio"
+          "rotulo": "Como escolher um psicólogo homem com quem você se sinta à vontade?",
+          "url": "/artigos/como-escolher-um-psicologo-homem/",
+          "status": "redigido_adaptado_para_revisao"
+        },
+        {
+          "rotulo": "Como funciona a terapia na Abordagem Centrada na Pessoa?",
+          "url": "/artigos/terapia-abordagem-centrada-na-pessoa/",
+          "status": "redigido_adaptado_para_revisao"
+        },
+        {
+          "rotulo": "Como escolher um psicólogo homem para terapia de casal?",
+          "url": "/artigos/psicologo-homem-terapia-de-casal/",
+          "status": "redigido_adaptado_para_revisao"
+        },
+        {
+          "rotulo": "Como escolher um psicólogo homem para terapia familiar?",
+          "url": "/artigos/psicologo-homem-terapia-familiar/",
+          "status": "redigido_adaptado_para_revisao"
         }
       ]
     }
@@ -136,7 +151,7 @@
       "pagina_local": "/vitoria-es/",
       "contato": "bernardo",
       "abordagem": "Abordagem Centrada na Pessoa",
-      "cadastro_detalhado": "parcial_faltam_redes",
+      "cadastro_detalhado": "completo",
       "foto": "/imagens/profissionais/bernardo-carielo-psicologo-homem-vitoria-es.png",
       "foto_alt": "Bernardo Carielo, psicólogo em Vitória, ES",
       "foto_uso": "placeholder_ate_fotografia_definitiva",
@@ -181,9 +196,21 @@
         "Formação em Abordagem Centrada na Pessoa pelo EncontroACP"
       ],
       "endereco_presencial": "Rua Darcy Grijó, 50, sala 409 — Edifício Madison Office Tower, Jardim da Penha, Vitória–ES, CEP 29060-500",
-      "redes": [],
-      "redes_status": "a_informar",
-      "fonte_cadastro": "https://psicologobernardo.com.br/"
+      "redes": [
+        {
+          "rede": "instagram",
+          "usuario": "bcarielo",
+          "url": "https://www.instagram.com/bcarielo/"
+        },
+        {
+          "rede": "site",
+          "usuario": "psicologobernardo.com.br",
+          "url": "https://psicologobernardo.com.br/"
+        }
+      ],
+      "redes_status": "confirmado_pelo_usuario_2026-11-07",
+      "fonte_cadastro": "https://psicologobernardo.com.br/",
+      "nome_registro": "Bernardo Carielo Macedo de Oliveira Pinto"
     },
     {
       "id": "raphael",
@@ -196,7 +223,7 @@
       "pagina_local": "/sao-paulo-sp/",
       "contato": "raphael",
       "abordagem": "Abordagem Centrada na Pessoa",
-      "cadastro_detalhado": "parcial_faltam_endereco_whatsapp_e_nome_de_registro",
+      "cadastro_detalhado": "parcial_falta_whatsapp",
       "servicos": [
         {
           "servico_id": "psicoterapia-individual",
@@ -233,7 +260,7 @@
       ],
       "foto_aviso_publico": false,
       "crp": "06/219272",
-      "nome_registro": "a_confirmar",
+      "nome_registro": "Raphael Fernandes Coimbra",
       "formacao": [
         "Formação Avançada em Prática da Psicologia Clínica na Abordagem Centrada na Pessoa",
         "Especialização em Luto e Rompimento de Vínculos"
@@ -245,8 +272,8 @@
           "url": "https://www.instagram.com/psiraphaelcoimbra/"
         }
       ],
-      "endereco_presencial": null,
-      "fonte_cadastro": "Perfil do Instagram informado pelo usuário em 2026-11-02"
+      "endereco_presencial": "Rua Vergueiro, 3153, 4º andar — Vila Mariana, São Paulo–SP, CEP 04101-300",
+      "fonte_cadastro": "Instagram e ficha do Google informados pelo usuário em 2026-11-07"
     }
   ],
   "conteudo_paginas": {
@@ -334,15 +361,11 @@
     "dados_vazios": "Campos null ou listas vazias com status a_informar/a_confirmar geram o placeholder",
     "publicacao": "O build lista todos os placeholders restantes; o build indexável (PUBLIC_INDEXABLE=true) falha se houver algum",
     "campos_atuais": [
-      "raphael.endereco_presencial (e o link Ver localização)",
       "raphael.whatsapp (botões do perfil e do card)",
-      "bernardo.redes",
-      "artigo-escolha: texto do quarto artigo",
-      "privacidade: dados de identificação da Arranjos Psicologia e canal para solicitações"
+      "privacidade: data de publicação da política"
     ],
     "conferir_sem_placeholder": [
-      "raphael.nome_registro",
-      "PUBLIC_GA_MEASUREMENT_ID"
+      "PUBLIC_GA_MEASUREMENT_ID (será criado depois)"
     ]
   }
 }

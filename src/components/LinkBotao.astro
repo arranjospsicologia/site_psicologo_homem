@@ -1,0 +1,11 @@
+---
+/** Link interno com aparência de botão secundário (menos destaque que o contato). */
+import Icone from './Icone.astro';
+import { url } from '../lib/caminhos';
+interface Props { href: string; rotulo: string; icone?: string }
+const { href, rotulo, icone } = Astro.props;
+---
+<a class="botao botao--secundario" href={url(href)}>
+  {icone && <Icone nome={icone} />}
+  <span>{rotulo}</span>
+</a>

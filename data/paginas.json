@@ -12,7 +12,8 @@
       "contato_principal": "arranjos",
       "whatsapp_flutuante": "arranjos",
       "fonte": "conteudo/home.md",
-      "texto_atualizado_em": "2026-11-02"
+      "texto_atualizado_em": "2026-11-02",
+      "imagem": "/imagens/paginas/inicio-abertura.png"
     },
     {
       "id": "sobre",
@@ -23,7 +24,8 @@
       "contato_principal": "arranjos",
       "whatsapp_flutuante": "arranjos",
       "fonte": "conteudo/sobre.md",
-      "texto_atualizado_em": "2026-11-02"
+      "texto_atualizado_em": "2026-11-02",
+      "imagem": "/imagens/paginas/sobre-abertura.png"
     },
     {
       "id": "vitoria",
@@ -35,7 +37,8 @@
       "contato_principal": "bernardo",
       "whatsapp_flutuante": "bernardo",
       "fonte": "conteudo/vitoria-es.md",
-      "texto_atualizado_em": "2026-11-02"
+      "texto_atualizado_em": "2026-11-02",
+      "imagem": "/imagens/paginas/vitoria-abertura.png"
     },
     {
       "id": "saopaulo",
@@ -47,7 +50,8 @@
       "contato_principal": "raphael",
       "whatsapp_flutuante": "bernardo",
       "fonte": "conteudo/sao-paulo-sp.md",
-      "texto_atualizado_em": "2026-11-02"
+      "texto_atualizado_em": "2026-11-02",
+      "imagem": "/imagens/paginas/sao-paulo-abertura.png"
     },
     {
       "id": "remoto",
@@ -62,7 +66,8 @@
       ],
       "whatsapp_flutuante": null,
       "fonte": "conteudo/atendimento-remoto.md",
-      "texto_atualizado_em": "2026-11-02"
+      "texto_atualizado_em": "2026-11-02",
+      "imagem": "/imagens/paginas/atendimento-online-abertura.png"
     },
     {
       "id": "artigo-preferencia",
@@ -72,7 +77,8 @@
       "fonte": "ja-pensou-por-que-voce-busca-um-psicologo-homem.md",
       "conteudo_status": "redigido_revisar_extensao",
       "contato_principal": "arranjos",
-      "whatsapp_flutuante": "arranjos"
+      "whatsapp_flutuante": "arranjos",
+      "imagem": "/imagens/paginas/artigo-ja-pensou.png"
     },
     {
       "id": "artigo-homens",
@@ -82,7 +88,8 @@
       "fonte": "para-homens-que-buscam-terapia.md",
       "conteudo_status": "redigido_revisar_extensao",
       "contato_principal": "arranjos",
-      "whatsapp_flutuante": "arranjos"
+      "whatsapp_flutuante": "arranjos",
+      "imagem": "/imagens/paginas/artigo-para-homens.png"
     },
     {
       "id": "artigo-mulheres",
@@ -92,17 +99,43 @@
       "fonte": "para-mulheres-que-buscam-um-psicologo-homem.md",
       "conteudo_status": "redigido_revisar_extensao",
       "contato_principal": "arranjos",
-      "whatsapp_flutuante": "arranjos"
+      "whatsapp_flutuante": "arranjos",
+      "imagem": "/imagens/paginas/artigo-para-mulheres.png"
     },
     {
       "id": "artigo-escolha",
-      "titulo": "Como escolher um psicólogo com quem você se sinta à vontade?",
-      "url": "/artigos/como-escolher-um-psicologo/",
+      "titulo": "Como escolher um psicólogo homem com quem você se sinta à vontade?",
+      "url": "/artigos/como-escolher-um-psicologo-homem/",
       "tipo": "artigo",
-      "fonte": "briefings/como-escolher-um-psicologo-com-quem-voce-se-sinta-a-vontade.md",
-      "conteudo_status": "briefing_proposto_titulo_provisorio",
+      "fonte": "como-escolher-um-psicologo-homem.md",
+      "conteudo_status": "redigido_adaptado_para_revisao",
       "contato_principal": "arranjos",
-      "whatsapp_flutuante": "arranjos"
+      "whatsapp_flutuante": "arranjos",
+      "imagem": "/imagens/paginas/artigo-como-escolher.png"
+    },
+    {
+      "id": "artigo-acp",
+      "tipo": "artigo",
+      "titulo": "Como funciona a terapia na Abordagem Centrada na Pessoa?",
+      "url": "/artigos/terapia-abordagem-centrada-na-pessoa/",
+      "fonte": "como-e-a-terapia-com-um-psicologo-homem-da-acp.md",
+      "conteudo_status": "redigido_adaptado_para_revisao"
+    },
+    {
+      "id": "artigo-casal",
+      "tipo": "artigo",
+      "titulo": "Como escolher um psicólogo homem para terapia de casal?",
+      "url": "/artigos/psicologo-homem-terapia-de-casal/",
+      "fonte": "como-escolher-um-psicologo-homem-para-terapia-de-casal.md",
+      "conteudo_status": "redigido_adaptado_para_revisao"
+    },
+    {
+      "id": "artigo-familia",
+      "tipo": "artigo",
+      "titulo": "Como escolher um psicólogo homem para terapia familiar?",
+      "url": "/artigos/psicologo-homem-terapia-familiar/",
+      "fonte": "como-escolher-um-psicologo-homem-para-terapia-familiar.md",
+      "conteudo_status": "redigido_adaptado_para_revisao"
     },
     {
       "id": "privacidade",
@@ -114,5 +147,6 @@
       "whatsapp_flutuante": "arranjos",
       "fonte": "conteudo/privacidade.md"
     }
-  ]
+  ],
+  "observacao_imagens": "Campo \"imagem\": arquivo mestre em public/. Imagens de ambiência, sem texto alternativo (decorativas). Abertura em 4:5; capas de artigo em 3:2."
 }

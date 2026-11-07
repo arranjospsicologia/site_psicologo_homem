@@ -19,8 +19,8 @@ const { blocos, acoes = {}, comentarios = [] } = Astro.props;
 // Ações consecutivas ficam no mesmo grupo de botões.
 type Item = { tipo: 'grupo'; acoes: string[] } | Bloco;
 const itens: Item[] = [];
-// Linha de identificação profissional em negrito ("Psicólogo · CRP ...") não é botão.
-const identificacao = /^Psic[óo]log[oa]\b.*CRP/i;
+// Linha de identificação profissional em negrito ("Nome completo · Psicólogo · CRP ...") não é botão.
+const identificacao = /\bCRP\s*\d{2}\/\d+/;
 for (const b of blocos) {
   if (b.tipo === 'acao' && identificacao.test(b.rotulo)) {
     itens.push({ tipo: 'html', html: `<p class="identificacao">${b.rotulo.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</p>` });

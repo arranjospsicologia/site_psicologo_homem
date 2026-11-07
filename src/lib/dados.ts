@@ -11,6 +11,8 @@ export interface Rede { rede: string; usuario?: string; url: string }
 export interface Profissional {
   id: string;
   nome_exibicao: string;
+  /** Nome completo, como consta no CRP (Código de Ética, art. 20). */
+  nome_registro?: string;
   cidade: string;
   uf: string;
   pagina_local: string;
@@ -32,6 +34,8 @@ export interface Pagina {
   fonte?: string;
   profissional?: string;
   conteudo_status: string;
+  /** Imagem de ambiência (arquivo mestre em public/). */
+  imagem?: string;
 }
 
 export const dadosSite = site;

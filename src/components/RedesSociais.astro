@@ -15,7 +15,7 @@ const redes = profissional.redes ?? [];
       {redes.map((r) => (
         <li>
           <a href={r.url} target="_blank" rel="noopener noreferrer" data-evento="social_click" data-page-id={paginaId} data-professional-id={profissional.id} data-network-id={r.rede}>
-            {nomes[r.rede] ?? r.rede}{r.usuario && r.rede === 'instagram' ? ` @${r.usuario}` : ''}
+            {r.rede === 'site' ? (r.usuario ?? new URL(r.url).hostname) : `${nomes[r.rede] ?? r.rede}${r.usuario ? ` @${r.usuario}` : ''}`}
             <Icone nome="link-externo" classe="ph-icon--p" />
             <span class="visualmente-oculto"> (abre em nova aba)</span>
           </a>

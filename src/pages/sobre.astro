@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Secoes from '../components/Secoes.astro';
 import BotaoContato from '../components/BotaoContato.astro';
+import ImagemAmbiente from '../components/ImagemAmbiente.astro';
 import { lerDocumento, textoFonte } from '../lib/conteudo';
 import { contatoDaPagina } from '../lib/contatos';
 import { pagina } from '../lib/dados';
@@ -10,10 +11,11 @@ const p = pagina('sobre');
 const doc = lerDocumento(textoFonte(p.fonte!));
 const contato = contatoDaPagina('sobre', 'principal')!;
 ---
-<Base paginaId="sobre" tipoPagina={p.tipo}>
+<Base paginaId="sobre" tipoPagina={p.tipo} imagemOg={p.imagem ? '/og/pagina/sobre.jpg' : undefined}>
   <Secoes
     doc={doc}
     acoes={{ 'Entrar em contato': { C: BotaoContato, props: { contato, rotulo: 'Entrar em contato', paginaId: 'sobre', tipoPagina: p.tipo, posicionamento: 'conteudo' } } }}
     destaque={['uma-abordagem-centrada-na-pessoa']}
+    laterais={p.imagem ? { abertura: { C: ImagemAmbiente, props: { arquivo: p.imagem, variante: 'abertura', prioridade: true } } } : {}}
   />
 </Base>

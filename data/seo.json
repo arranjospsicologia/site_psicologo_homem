@@ -35,8 +35,8 @@
       "descricao": "Mulheres podem preferir conversar com um psicólogo homem por motivos diferentes. Uma reflexão sobre essa escolha, sem generalizações."
     },
     "artigo-escolha": {
-      "titulo": "Como escolher um psicólogo com quem você se sinta à vontade?",
-      "descricao": "Como considerar a apresentação, a formação e a relação que começa nas primeiras conversas ao escolher um psicólogo."
+      "titulo": "Como escolher um psicólogo homem",
+      "descricao": "Perfil, registro no CRP, primeiro contato e primeiras sessões: como escolher um psicólogo homem com quem você se sinta à vontade para conversar."
     },
     "privacidade": {
       "titulo": "Privacidade",
@@ -45,6 +45,18 @@
     "404": {
       "titulo": "Página não encontrada",
       "descricao": "A página procurada não existe ou mudou de endereço."
+    },
+    "artigo-acp": {
+      "titulo": "Abordagem Centrada na Pessoa: como funciona a terapia",
+      "descricao": "Escuta empática, autenticidade e sua participação nas decisões: entenda como funciona a terapia com um psicólogo da Abordagem Centrada na Pessoa."
+    },
+    "artigo-casal": {
+      "titulo": "Psicólogo homem para terapia de casal: como escolher",
+      "descricao": "Conversar sobre a preferência, confirmar o atendimento a casais e ouvir as duas impressões: como escolher um psicólogo homem para terapia de casal."
+    },
+    "artigo-familia": {
+      "titulo": "Psicólogo homem para terapia familiar: como escolher",
+      "descricao": "Quem vai participar, como o profissional organiza o atendimento e o sigilo: o que considerar ao escolher um psicólogo homem para terapia familiar."
     }
   }
 }

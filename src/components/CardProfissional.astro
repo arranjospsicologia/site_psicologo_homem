@@ -20,7 +20,10 @@ const rotuloLocal = `Conhecer o atendimento em ${p.cidade}`;
     <Retrato profissional={p} tamanhos="(min-width: 900px) 200px, (min-width: 600px) 180px, 120px" classe="card__retrato" />
     <div class="card__identificacao">
       <h3 class="card__nome" id={`card-${p.id}`}>{p.nome_exibicao}</h3>
-      <p class="card__registro">Psicólogo · {p.crp ? `CRP ${p.crp}` : <Pendente descricao={`CRP de ${p.nome_exibicao}`} />}</p>
+      <p class="card__registro">
+        {p.nome_registro && p.nome_registro !== p.nome_exibicao && <span class="card__nome-completo">{p.nome_registro}</span>}
+        Psicólogo · {p.crp ? `CRP ${p.crp}` : <Pendente descricao={`CRP de ${p.nome_exibicao}`} />}
+      </p>
       <p class="card__local"><Icone nome="localizacao" classe="ph-icon--p" />{cidadeUf(p)} · Atendimento online</p>
     </div>
     <div class="card__texto">
@@ -58,7 +61,8 @@ const rotuloLocal = `Conhecer o atendimento em ${p.cidade}`;
   .card__acoes :global(.botao) { width: 100%; }
   .card__acoes :global(.acao-pendente) { width: 100%; }
   .card__nome { font-size: 1.3125rem; margin: 0 0 4px; }
-  .card__registro { margin: 0; font-size: 0.9375rem; color: var(--ph-grafite); }
+  .card__registro { margin: 0; font-size: 0.9375rem; color: var(--ph-grafite); line-height: 1.45; }
+  .card__nome-completo { display: block; }
   .card__local { margin: 2px 0 0; font-size: 0.9375rem; color: var(--ph-cinza); display: flex; align-items: center; gap: 6px; }
   .card__texto :global(p) { margin-bottom: 12px; }
   .card__abordagem { display: flex; align-items: center; gap: 8px; font-weight: 500; color: var(--ph-azul); }

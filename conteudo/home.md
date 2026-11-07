@@ -11,13 +11,13 @@ whatsapp_flutuante: home.flutuante
 
 Encontrar alguém com quem você se imagine à vontade para conversar pode ser um começo importante. Aqui, você conhece psicólogos homens para atendimento presencial ou online, seja você homem ou mulher.
 
-**Entrar em contato**
+**Entre em contato**
 
-<!-- Botão principal: home.principal, em data/contatos.json. -->
+**Conheça os profissionais**
+
+<!-- Botões da abertura. "Entre em contato": principal, com mais destaque; abre o WhatsApp com a mensagem home.principal, de data/contatos.json. "Conheça os profissionais": secundário, com menos destaque; leva à lista em /atendimento-remoto/. -->
 
 Profissionais com formação em **Abordagem Centrada na Pessoa** e anos de experiência clínica. Uma escuta que considera sua história, seu ritmo e as questões que você deseja trazer.
-
-[Atendimento em Vitória](/vitoria-es/) · [Atendimento em São Paulo](/sao-paulo-sp/) · [Atendimento online](/atendimento-remoto/)
 
 ## Algumas dúvidas antes de começar
 
@@ -35,7 +35,7 @@ O gênero não torna um profissional melhor ou pior. A preferência pode ter sig
 
 Conheça sua apresentação, formação e forma de trabalhar. No contato, você pode perguntar sobre o atendimento e contar o que procura, com o nível de detalhe que se sentir confortável em compartilhar.
 
-[Conhecer os profissionais](/atendimento-remoto/)
+[Como escolher um psicólogo homem](/artigos/como-escolher-um-psicologo-homem/) · [Conhecer os profissionais](/atendimento-remoto/)
 
 ### Posso fazer terapia online?
 

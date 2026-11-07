@@ -21,7 +21,7 @@ Se você procura um psicólogo homem em São Paulo, conheça **Raphael Coimbra**
 
 ## Conheça Raphael Coimbra
 
-**Psicólogo · CRP 06/219272**
+**Raphael Fernandes Coimbra · Psicólogo · CRP 06/219272**
 
 Raphael é psicólogo em São Paulo, com formação avançada em prática da psicologia clínica na **Abordagem Centrada na Pessoa** e especialização em luto e rompimento de vínculos. Na ACP, a sua experiência orienta a conversa: o que você sente, como vive suas relações e o que deseja compreender sobre si.
 

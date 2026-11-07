@@ -20,7 +20,7 @@ Se você procura um psicólogo homem em Vitória, conheça **Bernardo Carielo**.
 
 ## Conheça Bernardo Carielo
 
-**Psicólogo · CRP 16/5527**
+**Bernardo Carielo Macedo de Oliveira Pinto · Psicólogo · CRP 16/5527**
 
 Bernardo é formado em Psicologia pela Universidade Federal do Espírito Santo e tem formação em Abordagem Centrada na Pessoa pelo EncontroACP. Atende presencialmente em Vitória e também online.
 

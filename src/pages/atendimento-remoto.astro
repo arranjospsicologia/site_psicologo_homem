@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Secoes from '../components/Secoes.astro';
 import ListaProfissionais from '../components/ListaProfissionais.astro';
+import ImagemAmbiente from '../components/ImagemAmbiente.astro';
 import { lerDocumento, textoFonte, paragrafos } from '../lib/conteudo';
 import { pagina } from '../lib/dados';
 
@@ -12,9 +13,10 @@ if (!secaoLista?.id) throw new Error('Seção da listagem não encontrada em ate
 // Linhas de opções ("Todos · ...") são instruções de composição; as opções vêm do cadastro.
 const [textoLocalizacao, textoCombinacao] = paragrafos(secaoLista).filter((h) => !/^<p>Todos\b/.test(h));
 ---
-<Base paginaId="remoto" tipoPagina={p.tipo}>
+<Base paginaId="remoto" tipoPagina={p.tipo} imagemOg={p.imagem ? '/og/pagina/remoto.jpg' : undefined}>
   <Secoes
     doc={doc}
     substituir={{ [secaoLista.id]: { C: ListaProfissionais, props: { textoLocalizacao, textoCombinacao } } }}
+    laterais={p.imagem ? { abertura: { C: ImagemAmbiente, props: { arquivo: p.imagem, variante: 'abertura', prioridade: true } } } : {}}
   />
 </Base>

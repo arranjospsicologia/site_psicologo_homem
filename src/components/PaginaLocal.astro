@@ -8,6 +8,7 @@ import LinkLocalizacao from './LinkLocalizacao.astro';
 import ServicosOferecidos from './ServicosOferecidos.astro';
 import Endereco from './Endereco.astro';
 import Retrato from './Retrato.astro';
+import ImagemAmbiente from './ImagemAmbiente.astro';
 import { lerDocumento, textoFonte } from '../lib/conteudo';
 import { contatoDaPagina } from '../lib/contatos';
 import { pagina, profissional as profDe } from '../lib/dados';
@@ -37,7 +38,8 @@ const secaoPresencial = doc.secoes.find((s) => s.titulo?.startsWith('Atendimento
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: prof.nome_exibicao,
+  name: prof.nome_registro ?? prof.nome_exibicao,
+  alternateName: prof.nome_registro && prof.nome_registro !== prof.nome_exibicao ? prof.nome_exibicao : undefined,
   jobTitle: 'Psicólogo',
   identifier: prof.crp ? `CRP ${prof.crp}` : undefined,
   knowsAbout: prof.abordagem,
@@ -51,7 +53,10 @@ const jsonLd = {
     doc={doc}
     acoes={acoes}
     comentarios={comentarios}
-    laterais={{ [secaoConheca]: { C: Retrato, props: { profissional: prof, tamanhos: '(min-width: 900px) 340px, min(360px, 100vw)', prioridade: false } } }}
+    laterais={{
+      ...(p.imagem ? { abertura: { C: ImagemAmbiente, props: { arquivo: p.imagem, variante: 'abertura', prioridade: true } } } : {}),
+      [secaoConheca]: { C: Retrato, props: { profissional: prof, tamanhos: '(min-width: 900px) 340px, min(360px, 100vw)', prioridade: false } },
+    }}
     destaque={[secaoPresencial]}
   />
 </Base>

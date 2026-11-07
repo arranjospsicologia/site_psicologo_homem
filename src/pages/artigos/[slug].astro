@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import BotaoContato from '../../components/BotaoContato.astro';
 import Pendente from '../../components/Pendente.astro';
 import Icone from '../../components/Icone.astro';
+import ImagemAmbiente from '../../components/ImagemAmbiente.astro';
 import { lerArtigo } from '../../lib/conteudo';
 import { contatoDaPagina } from '../../lib/contatos';
 import { paginas, profissionais, dadosSite, seoDe, type Pagina } from '../../lib/dados';
@@ -33,22 +34,23 @@ const jsonLd = {
   description: seoDe(p.id).descricao,
   inLanguage: 'pt-BR',
   mainEntityOfPage: urlAbsoluta(p.url, Astro.site),
-  author: { '@type': 'Person', name: nomeAutor, jobTitle: 'Psicólogo', url: autor ? urlAbsoluta(autor.pagina_local, Astro.site) : undefined },
+  author: { '@type': 'Person', name: autor?.nome_registro ?? nomeAutor, jobTitle: 'Psicólogo', url: autor ? urlAbsoluta(autor.pagina_local, Astro.site) : undefined },
   publisher: { '@type': 'Organization', name: 'Psicólogo Homem' },
 };
 ---
-<Base paginaId={p.id} tipoPagina="artigo" tipoOg="article" jsonLd={emBriefing ? undefined : jsonLd}>
+<Base paginaId={p.id} tipoPagina="artigo" tipoOg="article" jsonLd={emBriefing ? undefined : jsonLd} imagemOg={p.imagem ? `/og/pagina/${p.id}.jpg` : undefined}>
   <article class="artigo">
     <header class="artigo__cabecalho">
       <div class="recipiente">
         <p class="artigo__sobretitulo"><Icone nome="artigos" classe="ph-icon--p" />Artigo</p>
         <h1 class="artigo__titulo">{titulo}</h1>
         <p class="artigo__autoria">
-          Por <a href={autor ? url(autor.pagina_local) : undefined}>{nomeAutor}</a>{autor?.crp && <>, psicólogo · CRP {autor.crp}</>}
+          Por <a href={autor ? url(autor.pagina_local) : undefined}>{autor?.nome_registro ?? nomeAutor}</a>{autor?.crp && <>, psicólogo · CRP {autor.crp}</>}
         </p>
       </div>
     </header>
     <div class="recipiente">
+      {p.imagem && <ImagemAmbiente arquivo={p.imagem} variante="capa" prioridade classe="artigo__capa" />}
       <div class="artigo__corpo">
         {artigo ? <Fragment set:html={artigo.html} /> : (
           <p><Pendente descricao={`Texto do artigo “${titulo}”`} /></p>
@@ -68,7 +70,8 @@ const jsonLd = {
 </Base>
 
 <style>
-  .artigo__cabecalho { padding-block: 40px 32px; border-bottom: var(--ph-borda); margin-bottom: 36px; }
+  .artigo__cabecalho { padding-block: 40px 28px; }
+  .artigo :global(.artigo__capa) { max-width: var(--ph-largura-leitura); margin-bottom: 36px; }
   .artigo__sobretitulo { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ph-cobre); }
   .artigo__titulo { font-family: var(--ph-fonte-editorial); font-weight: 500; letter-spacing: 0; max-width: 22ch; font-size: clamp(2rem, 1.5rem + 2.4vw, 3rem); }
   .artigo__autoria { margin: 0; color: var(--ph-cinza); font-size: 0.9375rem; }
@@ -84,7 +87,8 @@ const jsonLd = {
   .artigo__outros ul { padding-left: 1.1em; }
   .artigo__outros li { margin-bottom: 0.4em; }
   @media (min-width: 768px) {
-    .artigo__cabecalho { padding-block: 64px 40px; margin-bottom: 48px; }
+    .artigo__cabecalho { padding-block: 64px 36px; }
+    .artigo :global(.artigo__capa) { margin-bottom: 48px; }
     .artigo__corpo { font-size: 1.1875rem; }
   }
 </style>

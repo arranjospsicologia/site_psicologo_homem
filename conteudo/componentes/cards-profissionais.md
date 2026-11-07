@@ -6,7 +6,7 @@ identificacao_profissional: cadastro_confirmado
 
 ## Bernardo Carielo
 
-**Psicólogo · CRP 16/5527**  
+**Bernardo Carielo Macedo de Oliveira Pinto · Psicólogo · CRP 16/5527**  
 Vitória–ES · Atendimento online
 
 Formado em Psicologia pela UFES, com formação em Abordagem Centrada na Pessoa pelo EncontroACP. Atendimento para conversar sobre suas experiências, relações e questões pessoais, com atenção ao seu ritmo.
@@ -25,7 +25,7 @@ Formado em Psicologia pela UFES, com formação em Abordagem Centrada na Pessoa 
 
 ## Raphael Coimbra
 
-**Psicólogo · CRP 06/219272**  
+**Raphael Fernandes Coimbra · Psicólogo · CRP 06/219272**  
 São Paulo–SP · Atendimento online
 
 Formação avançada em prática da psicologia clínica na Abordagem Centrada na Pessoa e especialização em luto e rompimento de vínculos. Um espaço para falar sobre o que você vive e explorar suas questões com respeito à sua história, aos seus sentimentos e às escolhas que deseja fazer.
