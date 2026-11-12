@@ -119,7 +119,8 @@
       "titulo": "Como funciona a terapia na Abordagem Centrada na Pessoa?",
       "url": "/artigos/terapia-abordagem-centrada-na-pessoa/",
       "fonte": "como-e-a-terapia-com-um-psicologo-homem-da-acp.md",
-      "conteudo_status": "redigido_adaptado_para_revisao"
+      "conteudo_status": "redigido_adaptado_para_revisao",
+      "imagem": "/imagens/paginas/artigo-abordagem-centrada.png"
     },
     {
       "id": "artigo-casal",
@@ -127,7 +128,8 @@
       "titulo": "Como escolher um psicólogo homem para terapia de casal?",
       "url": "/artigos/psicologo-homem-terapia-de-casal/",
       "fonte": "como-escolher-um-psicologo-homem-para-terapia-de-casal.md",
-      "conteudo_status": "redigido_adaptado_para_revisao"
+      "conteudo_status": "redigido_adaptado_para_revisao",
+      "imagem": "/imagens/paginas/artigo-terapia-de-casal.png"
     },
     {
       "id": "artigo-familia",
@@ -135,7 +137,8 @@
       "titulo": "Como escolher um psicólogo homem para terapia familiar?",
       "url": "/artigos/psicologo-homem-terapia-familiar/",
       "fonte": "como-escolher-um-psicologo-homem-para-terapia-familiar.md",
-      "conteudo_status": "redigido_adaptado_para_revisao"
+      "conteudo_status": "redigido_adaptado_para_revisao",
+      "imagem": "/imagens/paginas/artigo-terapia-familiar.png"
     },
     {
       "id": "privacidade",
